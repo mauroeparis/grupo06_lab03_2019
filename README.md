@@ -1,3 +1,9 @@
 # Lab 3 - Proyecto MayWeather
 
-COMPLETAR!
+Para correr:
+
+```
+npm install
+
+npm start
+```
