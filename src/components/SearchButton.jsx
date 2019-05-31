@@ -11,16 +11,26 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function SearchButton() {
-  const classes = useStyles();
+class SearchButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-  return (
-    <div>
-      <Button variant="contained" color="primary" className={classes.button}>
-        Primary
-      </Button>
-    </div>
-  );
+  handleClick() {
+    console.log(this.props.cityName);
+    this.props.searchCity();
+  }
+  render() {
+    return (
+      <div>
+        <Button variant="contained" color="primary"
+          onClick={this.handleClick}>
+          Search
+        </Button>
+      </div>
+    );
+  }
 }
 
 export default SearchButton;
