@@ -1,42 +1,66 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
-class CurrentLoader extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
-    }
-  }
 
- render() {
-    return (
-      <div>
-        <div className="weatherIcon">
-          ICON props.weatherIcon
-        </div>
-        <div className="description">
-          NUMBER props.temperature,
-          TEXT props.description,
-        </div>
-        <div className="extraInfo">
-          TEXT-VALUE props.presión,
-          TEXT-VALUE props.humedad,
-          TEXT-VALUE props.viento,
-          TEXT-VALUE props.maxMin,
-          TEXT-VALUE props.sunsetAndDawn
-        </div>
-      </div>
-    );
-  }
+
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  },
+});
+
+
+function FixedContainer() {
+  return (
+    <React.Fragment>
+      <CssBaseline />
+      <Container fixed>
+        <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '80vh' }} />
+      </Container>
+    </React.Fragment>
+  );
 }
 
-export default CurrentTab;
+function Current(props) {
+  const { classes } = props;
 
-// ícono del clima,
-// temperatura,
-// descripción del clima,
-// presión,
-// humedad,
-// viento,
-// temperaturas máxima y mínima,
-// horario del amanecer y de la puesta del sol.
+  return (
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={6}>
+          <Paper className={classes.paper}>
+            {FixedContainer()}
+          </Paper>
+        </Grid>
+        <Grid item xs={6}>
+          <Paper className={classes.paper}>
+            xs=6
+          </Paper>
+        </Grid>
+        <Grid item xs={6}>
+          <Paper className={classes.paper}>
+            xs=6
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
+  );
+}
+
+Current.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Current);

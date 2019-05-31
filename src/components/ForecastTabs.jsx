@@ -7,6 +7,8 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 
+import Current from './Current'
+
 
 function TabContainer({ children, dir }) {
   return (
@@ -52,7 +54,7 @@ function CenteredTabs(props) {
         onChangeIndex={handleChangeIndex}
       >
         <TabContainer dir={theme.direction}>
-          // Current View
+          <Current />
         </TabContainer>
         <TabContainer dir={theme.direction}>
           // Forecast View
