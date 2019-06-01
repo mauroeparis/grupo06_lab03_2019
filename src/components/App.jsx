@@ -11,6 +11,7 @@ class App extends React.Component {
     super(props);
     this.handleBuffer = this.handleBuffer.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.setWeatherStatus = this.setWeatherStatus.bind(this);
     this.state = {show_buffer: false};
   }
 
@@ -20,6 +21,10 @@ class App extends React.Component {
 
   handleInput(cityName) {
     this.setState({cityName: cityName});
+  }
+
+  setWeatherStatus(data) {
+    this.setState(data);
   }
 
   render() {
@@ -32,6 +37,7 @@ class App extends React.Component {
         <SearchButton
           handleBuffer={this.handleBuffer}
           cityName={this.state.cityName}
+          setWeatherStatus={this.setWeatherStatus}
         />
         {this.state.show_buffer &&
           <BoxLoader />

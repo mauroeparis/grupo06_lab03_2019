@@ -21,7 +21,7 @@ class SearchBar extends React.Component {
     return (
       <TextField
         id="filled-search"
-        label="Search field"
+        label="Enter your location"
         type="search"
         margin="normal"
         variant="filled"
