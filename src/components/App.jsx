@@ -17,6 +17,7 @@ class App extends React.Component {
 
     this.handleBuffer = this.handleBuffer.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.setWeatherStatus = this.setWeatherStatus.bind(this);
     this.state = {show_buffer: false};
 }
   openTabs() {
@@ -31,6 +32,9 @@ class App extends React.Component {
   }
 
 
+  setWeatherStatus(data) {
+    this.setState(data);
+  }
 
   render() {
     var propsNeeded = {};
@@ -44,6 +48,7 @@ class App extends React.Component {
           handleBuffer={this.handleBuffer}
           cityName={this.state.cityName}
           openTabs={this.openTabs}
+          setWeatherStatus={this.setWeatherStatus}
         />
         {this.state.tabs ? (
             <ForecastTabs

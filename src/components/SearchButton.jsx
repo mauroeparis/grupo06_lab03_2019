@@ -14,17 +14,35 @@ class SearchButton extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
+  getUsefulData(response) {
+    var data = {};
+    data.minTemp = response.data.main.temp_min;
+    data.maxTemp = response.data.main.temp_max;
+    data.humidity = response.data.main.humidity;
+    data.currTemp = response.data.main.temp;
+    data.pressure = response.data.main.pressure;
+    data.wind = response.data.wind.speed;
+    data.icon = response.data.weather[0].icon;
+    data.description = response.data.weather[0].main;
+    data.sunrise = response.data.sys.sunrise;
+    data.sunset = response.data.sys.sunset;
+    return data;
+  }
+
   handleClick() {
-    this.props.handleBuffer()
+    this.props.handleBuffer();
     axios.get(
-      BASE_URL+'?q='+this.props.cityName+'&appid='+API_KEY
+      BASE_URL+'?q='+this.props.cityName+'&units=metric&appid='+API_KEY
     ).then(response => {
       console.log(response);
       this.props.handleBuffer();
       this.props.openTabs();
+      this.props.setWeatherStatus(
+        this.getUsefulData(response)
+      );
     }).catch(response => {
       console.log(response);
-      this.props.handleBuffer()
+      this.props.handleBuffer();
     })
   }
 
@@ -33,7 +51,7 @@ class SearchButton extends React.Component {
       <div>
         <Button variant="contained" color="primary"
           onClick={this.handleClick}>
-          Search
+          Check weather
         </Button>
       </div>
     );
