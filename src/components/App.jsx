@@ -11,18 +11,19 @@ import SearchBar from "./SearchBar"
 class App extends React.Component {
   constructor(props) {
     super(props);
-
     this.openTabs = this.openTabs.bind(this);
-    this.state = {tabs: false};
-
     this.handleBuffer = this.handleBuffer.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.setWeatherStatus = this.setWeatherStatus.bind(this);
-    this.state = {show_buffer: false};
-}
+    this.state = {
+      show_buffer: false,
+      tabs: false,
+    };
+  }
+
   openTabs() {
     this.setState({tabs: true});
   }
+
   handleBuffer() {
     this.setState({show_buffer: !this.state.show_buffer});
   }
@@ -30,7 +31,6 @@ class App extends React.Component {
   handleInput(cityName) {
     this.setState({cityName: cityName});
   }
-
 
   setWeatherStatus(data) {
     this.setState(data);
