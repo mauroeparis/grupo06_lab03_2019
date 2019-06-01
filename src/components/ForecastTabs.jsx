@@ -35,6 +35,19 @@ function CenteredTabs(props) {
     setValue(index);
   }
 
+  var weatherinfo = {
+  description1 : 10,
+  description2 : 30,
+  pressure : 10,
+  minTemp : 30,
+  sunrise : 10,
+  wind : 30,
+  humidity : 30,
+  maxTemp : 30,
+  maxTemp : 30,
+  sunset : 10,
+};
+
   return (
     <Paper>
       <Tabs
@@ -54,7 +67,7 @@ function CenteredTabs(props) {
         onChangeIndex={handleChangeIndex}
       >
         <TabContainer dir={theme.direction}>
-          <Current />
+          <Current weatherinfo={weatherinfo}/>
         </TabContainer>
         <TabContainer dir={theme.direction}>
           // Forecast View

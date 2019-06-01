@@ -32,7 +32,7 @@ function FixedContainer() {
       <CssBaseline />
       <Container fixed>
         <Typography component="div"
-          style={{ backgroundColor: '#cfe8fc', height: '20vh' }} />
+          style={{ backgroundColor: '#cfe8fc', height: '12vh' }} />
       </Container>
     </React.Fragment>
   );
@@ -52,93 +52,73 @@ const gridStyles = theme => ({
     padding: theme.spacing(1),
     textAlign: 'center',
     color: theme.palette.text.secondary,
+
   },
 });
-
-function FormRow(props) {
-  const { classes } = props;
-
-  return (
-    <React.Fragment>
-      <Grid item xs={4}>
-        <Paper className={classes.paper}>
-          {FixedContainer()}
-        </Paper>
-      </Grid>
-      <Grid item xs={4}>
-        <Paper className={classes.paper}>
-          {'Pressure'} {weatherinfo["preasure"]}
-        </Paper>
-        <Paper className={classes.paper}>
-          {'Min Temp'} {weatherinfo["minTemp"]}
-        </Paper>
-      </Grid>
-      <Grid item xs={4}>
-        <Paper className={classes.paper}>
-          {'Humidity'} {weatherinfo["humidity"]}
-        </Paper>
-        <Paper className={classes.paper}>
-          {'Max Temp'} {weatherinfo["maxTemp"]}
-        </Paper>
-      </Grid>
-    </React.Fragment>
-  );
-}
-
-FormRow.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-var weatherinfo = {
-  description1 : 10,
-  description2 : 30,
-  preasure : 10,
-  minTemp : 30,
-  sunrise : 10,
-  wind : 30,
-  humidity : 30,
-  maxTemp : 30,
-  maxTemp : 30,
-  sunset : 10,
-};
 
 function Current(props) {
   const { classes } = props;
 
   return (
     <div className={classes.root}>
-      <Grid container spacing={1}>
-        <Grid container item xs={12} spacing={3}>
-            <FormRow classes={classes} />
+      <Grid container item xs={12}>
+        <Grid container item xs={3} spacing={3}>
         </Grid>
-      </Grid>
-      <Grid container spacing={1}>
-        <Grid container item xs={12} spacing={3}>
+        <Grid container item xs={6} spacing={3}>
+          <Grid item xs={4}>
+            <Paper className={classes.paper}>
+              {FixedContainer()}
+            </Paper>
+          </Grid>
           <Grid item xs={4}>
             <Paper className={classes.paper} >
-              {"Description 1:"} {weatherinfo["description1"]}
+              {'Pressure'} {props.weatherinfo["pressure"]}
             </Paper>
             <Paper className={classes.paper}>
-              {"Description 2: "} {weatherinfo["description2"]}
-          </Paper>
-          </Grid>
-          <Grid item xs={4}>
-            <Paper className={classes.paper}>
-              {"Sunrise"} {weatherinfo["sunrise"]}
-            </Paper>
-            <Paper className={classes.paper}>
-              {"Wind"} {weatherinfo["wind"]}
+              {'Min Temp'} {props.weatherinfo["minTemp"]}
             </Paper>
           </Grid>
           <Grid item xs={4}>
             <Paper className={classes.paper}>
-              {"Sunset"} {weatherinfo["sunset"]}
+              {'Humidity'} {props.weatherinfo["humidity"]}
+            </Paper>
+            <Paper className={classes.paper}>
+              {'Max Temp'} {props.weatherinfo["maxTemp"]}
             </Paper>
           </Grid>
-
-
+        </Grid>
+          <Grid container item xs={3} spacing={3}>
+          </Grid>
+      <Grid container spacing={1}>
+        <Grid container item xs={3} spacing={3}>
+        </Grid>
+        <Grid container item xs={6} spacing={3}>
+          <Grid item xs={4}>
+            <Paper className={classes.paper} >
+              {"Description 1:"} {props.weatherinfo["description1"]}
+            </Paper>
+            <Paper className={classes.paper}>
+              {"Description 2: "} {props.weatherinfo["description2"]}
+            </Paper>
+          </Grid>
+          <Grid item xs={4}>
+            <Paper className={classes.paper}>
+              {"Sunrise"} {props.weatherinfo["sunrise"]}
+            </Paper>
+            <Paper className={classes.paper}>
+              {"Wind"} {props.weatherinfo["wind"]}
+            </Paper>
+          </Grid>
+          <Grid item xs={4}>
+            <Paper className={classes.paper}>
+              {"Sunset"} {props.weatherinfo["sunset"]}
+            </Paper>
+          </Grid>
+        </Grid>
+        <Grid container item xs={3} spacing={3}>
         </Grid>
       </Grid>
+    </Grid>
     </div>
   );
 }
