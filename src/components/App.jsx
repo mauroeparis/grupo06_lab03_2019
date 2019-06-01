@@ -9,13 +9,13 @@ import SearchBar from "./SearchBar"
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.searchCity = this.searchCity.bind(this);
+    this.handleBuffer = this.handleBuffer.bind(this);
     this.handleInput = this.handleInput.bind(this);
-    this.state = {clicked: false};
+    this.state = {show_buffer: false};
   }
 
-  searchCity() {
-    this.setState({clicked: true});
+  handleBuffer() {
+    this.setState({show_buffer: !this.state.show_buffer});
   }
 
   handleInput(cityName) {
@@ -24,14 +24,18 @@ class App extends React.Component {
 
   render() {
     return (
-        <div>
-          <NavBar />
-          <SearchBar
-            saveInput={this.handleInput}
-          />
-          <SearchButton searchCity={this.searchCity}
-           cityName={this.state.cityName} />
+      <div>
+        <NavBar />
+        <SearchBar
+          saveInput={this.handleInput}
+        />
+        <SearchButton
+          handleBuffer={this.handleBuffer}
+          cityName={this.state.cityName}
+        />
+        {this.state.show_buffer &&
           <BoxLoader />
+        }
       </div>
     );
   }
