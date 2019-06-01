@@ -20,12 +20,14 @@ class SearchButton extends React.Component {
       BASE_URL+'?q='+this.props.cityName+'&appid='+API_KEY
     ).then(response => {
       console.log(response);
-      this.props.handleBuffer()
+      this.props.handleBuffer();
+      this.props.openTabs();
     }).catch(response => {
       console.log(response);
       this.props.handleBuffer()
     })
   }
+
   render() {
     return (
       <div>

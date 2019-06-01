@@ -30,6 +30,8 @@ class App extends React.Component {
     this.setState({cityName: cityName});
   }
 
+
+
   render() {
     var propsNeeded = {};
     return (
@@ -41,22 +43,20 @@ class App extends React.Component {
         <SearchButton
           handleBuffer={this.handleBuffer}
           cityName={this.state.cityName}
+          openTabs={this.openTabs}
         />
         {this.state.tabs ? (
             <ForecastTabs
               {...propsNeeded}
             />
-          ) : (
-            <div>
-              <TestButton handleClick={this.openTabs} />
-              <BoxLoader />
-            </div>
-          )
-        }
+         ) : (
+           <div>
         {this.state.show_buffer &&
           <BoxLoader />
         }
-      </div>
+        </div>
+    )}
+    </div>
     );
   }
 }
