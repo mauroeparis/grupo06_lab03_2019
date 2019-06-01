@@ -7,12 +7,14 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 
+import BoxLoader from "./Loader"
 import Current from './Current'
+import Forecast from './Forecast'
 
 
-function TabContainer({ children, dir }) {
+function TabContainer({ children }) {
   return (
-    <Typography component="div" dir={dir} style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ padding: 8 * 3 }}>
       {children}
     </Typography>
   );
@@ -20,64 +22,75 @@ function TabContainer({ children, dir }) {
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
-  dir: PropTypes.string.isRequired,
 };
 
-function CenteredTabs(props) {
-  const [value, setValue] = React.useState(0);
-  const theme = useTheme();
 
-  function handleChange(event, newValue) {
-    setValue(newValue);
+class ForecastTabs extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeIndex = this.handleChangeIndex.bind(this);
+    this.state = {
+      forecastTab: false,
+      value: 0,
+    };
   }
 
-  function handleChangeIndex(index) {
-    setValue(index);
+  setValue(newValue){
+    this.setState({value: newValue})
   }
 
-  var weatherinfo = {
-  description1 : 10,
-  description2 : 30,
-  pressure : 10,
-  minTemp : 30,
-  sunrise : 10,
-  wind : 30,
-  humidity : 30,
-  maxTemp : 30,
-  maxTemp : 30,
-  sunset : 10,
-};
+  handleChange(event, newValue) {
+    this.setValue(newValue);
+  }
 
-  return (
-    <Paper>
-      <Tabs
-        value={value}
-        onChange={handleChange}
-        indicatorColor="primary"
-        textColor="primary"
-        variant="fullWidth"
-      >
-        <Tab label="Current" />
-        <Tab label="Forecast" />
-        <Tab label="UVI" />
-      </Tabs>
-      <SwipeableViews
-        axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-        index={value}
-        onChangeIndex={handleChangeIndex}
-      >
-        <TabContainer dir={theme.direction}>
-          <Current weatherinfo={weatherinfo}/>
-        </TabContainer>
-        <TabContainer dir={theme.direction}>
-          // Forecast View
-        </TabContainer>
-        <TabContainer dir={theme.direction}>
-          // UVI View
-        </TabContainer>
-      </SwipeableViews>
-    </Paper>
-  );
+  handleChangeIndex(index) {
+    this.setValue(index);
+  }
+
+  render() {
+
+    return (
+      <Paper>
+        <Tabs
+          value={this.state.value}
+          onChange={this.handleChange}
+          indicatorColor="primary"
+          textColor="primary"
+          variant="fullWidth"
+        >
+          <Tab label="Current" />
+          <Tab label="Forecast"/>
+          <Tab label="UVI" disabled />
+        </Tabs>
+        <SwipeableViews
+
+          index={this.state.value}
+          onChangeIndex={this.handleChangeIndex}
+        >
+          <TabContainer >
+            // Current
+          </TabContainer>
+          <TabContainer >
+            {this.state.forecastTab ? (
+              <ForecastTabs
+                {...propsNeeded}
+              />
+             ) : (
+              <div>
+                <BoxLoader />
+              </div>
+            )}
+            <BoxLoader />
+            <Forecast />
+          </TabContainer>
+          <TabContainer >
+            // UVI View
+          </TabContainer>
+        </SwipeableViews>
+      </Paper>
+    );
+  }
 }
 
-export default CenteredTabs;
+export default ForecastTabs;
