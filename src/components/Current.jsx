@@ -18,7 +18,9 @@ class Current extends React.Component  {
     console.log(this.props);
     const icon =
       this.props.icon ? (
-        <img src={require('../../icons/' + this.props.icon + '.svg')} width={150} height={150} mode='fit' />
+        <img src={require(
+          '../../icons/' + this.props.icon + '.svg'
+        )} width={150} height={150} mode='fit' />
       ) : (
         <div> </div>
       );
