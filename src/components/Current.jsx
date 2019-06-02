@@ -9,12 +9,20 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
+
 class Current extends React.Component  {
   constructor(props) {
     super(props);
   }
 
   render() {
+
+    const paperStyle = {
+      textAlign: 'center',
+      color :'grey',
+      padding : 8
+    };
+
     console.log(this.props);
     const icon =
       this.props.icon ? (
@@ -36,18 +44,18 @@ class Current extends React.Component  {
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
+              <Paper style={paperStyle} >
                 {'Pressure: '} {this.props.pressure}
               </Paper>
-              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
+              <Paper style={paperStyle} >
                 {'Min Temp: '} {this.props.minTemp}
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
+              <Paper style={paperStyle} >
                 {'Humidity: '} {this.props.humidity}
               </Paper>
-              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
+              <Paper style={paperStyle} >
                 {'Max Temp: '} {this.props.maxTemp}
               </Paper>
             </Grid>
@@ -59,23 +67,23 @@ class Current extends React.Component  {
           </Grid>
           <Grid container item xs={6} spacing={3}>
             <Grid item xs={4}>
-              <Paper style={{color:'grey', textAlign: 'center', padding: 8}}>
+              <Paper style={paperStyle}>
                 {this.props.currTemp} {"°C"}
               </Paper>
-              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
+              <Paper style={paperStyle} >
                 {this.props.description}
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
+              <Paper style={paperStyle} >
                 {"Sunrise: "} {this.props.sunrise}
               </Paper>
-              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
+              <Paper style={paperStyle} >
                 {"Wind: "} {this.props.wind}
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
+              <Paper style={paperStyle} >
                 {"Sunset: "} {this.props.sunset}
               </Paper>
             </Grid>
