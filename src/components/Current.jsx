@@ -29,23 +29,23 @@ class Current extends React.Component  {
           </Grid>
           <Grid container item xs={6} spacing={3}>
             <Grid item xs={4}>
-              <Paper>
+              <Paper style={{textAlign: 'center'}} >
                 {icon}
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper>
+              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
                 {'Pressure: '} {this.props.pressure}
               </Paper>
-              <Paper>
+              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
                 {'Min Temp: '} {this.props.minTemp}
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper>
+              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
                 {'Humidity: '} {this.props.humidity}
               </Paper>
-              <Paper>
+              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
                 {'Max Temp: '} {this.props.maxTemp}
               </Paper>
             </Grid>
@@ -57,23 +57,23 @@ class Current extends React.Component  {
           </Grid>
           <Grid container item xs={6} spacing={3}>
             <Grid item xs={4}>
-              <Paper>
+              <Paper style={{color:'grey', textAlign: 'center', padding: 8}}>
                 {this.props.currTemp} {"°C"}
               </Paper>
-              <Paper>
+              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
                 {"Description: "} {this.props.description}
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper>
+              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
                 {"Sunrise: "} {this.props.sunrise}
               </Paper>
-              <Paper>
+              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
                 {"Wind: "} {this.props.wind}
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper>
+              <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
                 {"Sunset: "} {this.props.sunset}
               </Paper>
             </Grid>
@@ -86,6 +86,5 @@ class Current extends React.Component  {
     );
   }
 }
-
 
 export default Current;
