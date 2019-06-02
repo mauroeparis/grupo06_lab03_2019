@@ -1,4 +1,6 @@
 import React from "react";
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
 
 import BoxLoader from "./Loader"
 import NavBar from "./NavBar"
@@ -41,15 +43,25 @@ class App extends React.Component {
     return (
       <div>
         <NavBar />
-        <SearchBar
-          saveInput={this.handleInput}
-        />
-        <SearchButton
-          handleBuffer={this.handleBuffer}
-          cityName={this.state.cityName}
-          openTabs={this.openTabs}
-          setWeatherStatus={this.setWeatherStatus}
-        />
+            <Grid container item xs={4} spacing={0}>
+              <Grid item xs={4}>
+                <Box mt={0}>
+                  <SearchBar
+                    saveInput={this.handleInput}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={2}>
+                <Box mt={2} ml={1}>
+                  <SearchButton
+                    handleBuffer={this.handleBuffer}
+                    cityName={this.state.cityName}
+                    openTabs={this.openTabs}
+                    setWeatherStatus={this.setWeatherStatus}
+                  />
+                </Box>
+              </Grid>
+            </Grid>
         {this.state.tabs ? (
             <ForecastTabs
               minTemp={this.state.minTemp}
