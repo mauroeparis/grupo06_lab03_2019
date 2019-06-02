@@ -12,22 +12,16 @@ import Container from '@material-ui/core/Container';
 class Current extends React.Component  {
   constructor(props) {
     super(props);
-    this.FixedContainer = this.FixedContainer.bind(this);
-  }
-
-  FixedContainer() {
-    return (
-      <React.Fragment>
-        <CssBaseline />
-        <Container fixed>
-          <Typography component="div"
-            style={{ backgroundColor: '#cfe8fc', height: '12vh' }} />
-        </Container>
-      </React.Fragment>
-    );
   }
 
   render() {
+    console.log(this.props);
+    const icon =
+      this.props.icon ? (
+        <img src={require('../../icons/' + this.props.icon + '.svg')} />
+      ) : (
+        <div> </div>
+      );
     return (
       <div>
         <Grid container item xs={12}>
@@ -36,7 +30,7 @@ class Current extends React.Component  {
           <Grid container item xs={6} spacing={3}>
             <Grid item xs={4}>
               <Paper>
-                {this.FixedContainer()}
+                {icon}
               </Paper>
             </Grid>
             <Grid item xs={4}>

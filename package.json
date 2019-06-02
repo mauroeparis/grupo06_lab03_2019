@@ -38,6 +38,7 @@
     "eslint-plugin-react": "7.13.0",
     "prettier": "1.17.1",
     "react-hot-loader": "^4.8.8",
+    "url-loader": "^1.1.2",
     "webpack-dev-server": "^3.4.1"
   }
 }
