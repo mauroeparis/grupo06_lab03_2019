@@ -11,8 +11,31 @@ import BoxLoader from "./Loader"
 
 const axios = require('axios');
 const API_KEY='5173f98ffa679c9f72e89391881592a0';
-const BASE_URL='https://api.openweathermap.org/data/2.5/forecast'
+const BASE_URL='https://api.openweathermap.org/data/2.5/forecast';
 
+function DayCard(props) {
+  return (
+    <Card>
+      <CardActionArea>
+        <CardContent>
+          <Typography  color="textSecondary" gutterBottom>
+            {props.dayData[0].dt}
+          </Typography>
+          <img src='http://openweathermap.org/img/w/10d.png' />
+          <Typography variant="h5" component="h2">
+            {props.dayData[3].weather.main}
+          </Typography>
+          <Typography variant="body2" component="p">
+            Min Temp: {props.dayData[0].main.temp_min}
+          </Typography>
+          <Typography variant="body2" component="p">
+            Max Temp: {props.dayData[7].main.temp_max}
+          </Typography>
+        </CardContent>
+      </CardActionArea>
+    </Card>
+  );
+}
 
 class Forecast extends React.Component {
   constructor(props){
@@ -24,9 +47,9 @@ class Forecast extends React.Component {
 
   componentDidMount() {
     axios.get(
-      BASE_URL+'?q='+this.props.cityName+'&appid='+API_KEY
+      BASE_URL+'?q='+this.props.cityName+'&units=metric&appid='+API_KEY
     ).then(response => {
-      this.formatData(response.data);
+      this.formatForecastData(response.data.list);
       this.setState({buff:false})
     }).catch(response => {
       console.log(response);
@@ -34,42 +57,43 @@ class Forecast extends React.Component {
     })
   }
 
-  formatForecastData(data) {
-    console.log(data);
+  formatForecastData(dayList) {
+    dayList.forEach(function(day){
+      day.weather = day.weather[0]
+      const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+      const dateObj = new Date(day.dt)
+      day.dt = dateObj.getDate() + "/" + dateObj.getMonth() + 1;
+      delete day.main.sea_level
+      delete day.main.grnd_level
+      delete day.weather.id
+      delete day.clouds
+      delete day.wind.deg
+      delete day.sys
+      delete day.dt_txt
+    });
+    this.setState({
+      dayOne: dayList.slice(0, 8),
+      dayTwo: dayList.slice(8, 16),
+      dayThree: dayList.slice(16, 24),
+      dayFour: dayList.slice(24, 32),
+      dayFive: dayList.slice(32, 40),
+    });
   }
 
   render() {
-    const card = (
-      <Card>
-        <CardActionArea>
-          <CardContent>
-            <Typography  color="textSecondary" gutterBottom>
-              Date
-            </Typography>
-            <img src='http://openweathermap.org/img/w/10d.png' />
-            <Typography variant="h5" component="h2">
-              description
-            </Typography>
-            <Typography variant="body2" component="p">
-              Min Temp
-            </Typography>
-            <Typography variant="body2" component="p">
-              Max Temp
-            </Typography>
-          </CardContent>
-        </CardActionArea>
-      </Card>
-    );
+    const cards = [
+      <DayCard dayData={this.state.dayOne} key={1}/>,
+      <DayCard dayData={this.state.dayTwo} key={2}/>,
+      <DayCard dayData={this.state.dayThree} key={3}/>,
+      <DayCard dayData={this.state.dayFour} key={4}/>,
+      <DayCard dayData={this.state.dayFive} key={5}/>,
+    ];
 
-    const cards = [];
-
-    for (var i=0;i<5;i++) {
-      cards.push(
-        <Grid item xs={2} key={i}>
-          {card}
-        </Grid>
-      );
-    }
+    cards.forEach(function(card, index) {
+      <Grid item xs={2} key={index}>
+        card
+      </Grid>
+    });
 
     return (
       this.state.buff ? (
