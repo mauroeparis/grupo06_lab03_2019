@@ -14,6 +14,7 @@ class App extends React.Component {
     this.openTabs = this.openTabs.bind(this);
     this.handleBuffer = this.handleBuffer.bind(this);
     this.handleInput = this.handleInput.bind(this);
+    this.setWeatherStatus = this.setWeatherStatus.bind(this);
     this.state = {
       show_buffer: false,
       tabs: false,
@@ -37,7 +38,6 @@ class App extends React.Component {
   }
 
   render() {
-    var propsNeeded = {};
     return (
       <div>
         <NavBar />
@@ -52,7 +52,17 @@ class App extends React.Component {
         />
         {this.state.tabs ? (
             <ForecastTabs
-              {...propsNeeded}
+              minTemp={this.state.minTemp}
+              maxTemp={this.state.maxTemp}
+              humidity={this.state.humidity}
+              currTemp={this.state.currTemp}
+              pressure={this.state.pressure}
+              wind={this.state.wind}
+              icon={this.state.icon}
+              description={this.state.description}
+              sunrise={this.state.sunrise}
+              sunset={this.state.sunset}
+              cityName={this.state.cityName}
             />
          ) : (
            <div>

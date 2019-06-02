@@ -69,7 +69,18 @@ class ForecastTabs extends React.Component {
           onChangeIndex={this.handleChangeIndex}
         >
           <TabContainer >
-            // Current
+            <Current
+              minTemp={this.props.minTemp}
+              maxTemp={this.props.maxTemp}
+              humidity={this.props.humidity}
+              currTemp={this.props.currTemp}
+              pressure={this.props.pressure}
+              wind={this.props.wind}
+              icon={this.props.icon}
+              description={this.props.description}
+              sunrise={this.props.sunrise}
+              sunset={this.props.sunset}
+            />
           </TabContainer>
           <TabContainer >
             {this.state.forecastTab ? (
