@@ -52,7 +52,7 @@ class ForecastTabs extends React.Component {
 
     return (
       <Paper>
-        <Tabs
+        <Tabs style={{marginTop:'40px'}}
           value={this.state.value}
           onChange={this.handleChange}
           indicatorColor="primary"

@@ -34,7 +34,7 @@ class Current extends React.Component  {
       );
     return (
       <div>
-        <Grid container item xs={12}>
+        <Grid container item xs={12} style={{marginTop:'50px'}}>
           <Grid container item xs={3} spacing={3}>
           </Grid>
           <Grid container item xs={6} spacing={3}>
@@ -45,18 +45,18 @@ class Current extends React.Component  {
             </Grid>
             <Grid item xs={4}>
               <Paper style={paperStyle} >
-                {'Pressure: '} {this.props.pressure}
+                {'Pressure: '} {this.props.pressure + ' hpm'}
               </Paper>
               <Paper style={paperStyle} >
-                {'Min Temp: '} {this.props.minTemp}
+                {'Min Temp: '} {this.props.minTemp + ' °C'}
               </Paper>
             </Grid>
             <Grid item xs={4}>
               <Paper style={paperStyle} >
-                {'Humidity: '} {this.props.humidity}
+                {'Humidity: '} {this.props.humidity + ' %'}
               </Paper>
               <Paper style={paperStyle} >
-                {'Max Temp: '} {this.props.maxTemp}
+                {'Max Temp: '} {this.props.maxTemp + ' °C'}
               </Paper>
             </Grid>
           </Grid>
@@ -79,7 +79,7 @@ class Current extends React.Component  {
                 {"Sunrise: "} {this.props.sunrise}
               </Paper>
               <Paper style={paperStyle} >
-                {"Wind: "} {this.props.wind}
+                {"Wind: "} {this.props.wind + ' Km/h'}
               </Paper>
             </Grid>
             <Grid item xs={4}>

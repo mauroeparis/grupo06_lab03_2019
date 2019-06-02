@@ -44,12 +44,10 @@ class App extends React.Component {
       <div>
         <NavBar />
             <Grid container item xs={4} spacing={0}>
-              <Grid item xs={4}>
-                <Box mt={0}>
-                  <SearchBar
-                    saveInput={this.handleInput}
-                  />
-                </Box>
+              <Grid item xs={4} style={{marginTop:'1px'}}>
+                <SearchBar
+                  saveInput={this.handleInput}
+                />
               </Grid>
               <Grid item xs={2}>
                 <Box mt={2} ml={1}>
