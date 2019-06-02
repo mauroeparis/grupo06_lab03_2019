@@ -63,7 +63,7 @@ class Current extends React.Component  {
                 {this.props.currTemp} {"°C"}
               </Paper>
               <Paper style={{color:'grey', textAlign: 'center', padding: 8}} >
-                {"Description: "} {this.props.description}
+                {this.props.description}
               </Paper>
             </Grid>
             <Grid item xs={4}>
