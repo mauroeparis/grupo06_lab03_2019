@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Current from './Current'
 import Forecast from './Forecast'
+import MultipleCard from './ForecastDetail'
 
 
 function TabContainer({ children }) {
@@ -85,6 +86,9 @@ class ForecastTabs extends React.Component {
              ) : (
               <div></div>
             )}
+            <div>
+            <MultipleCard/>
+            </div>
           </TabContainer>
           <TabContainer >
             // UVI View
