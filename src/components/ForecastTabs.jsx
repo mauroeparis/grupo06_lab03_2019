@@ -7,7 +7,6 @@ import Tab from '@material-ui/core/Tab';
 import Tabs from '@material-ui/core/Tabs';
 import Typography from '@material-ui/core/Typography';
 
-import BoxLoader from "./Loader"
 import Current from './Current'
 import Forecast from './Forecast'
 
@@ -49,7 +48,6 @@ class ForecastTabs extends React.Component {
   }
 
   render() {
-
     return (
       <Paper>
         <Tabs style={{marginTop:'40px'}}
@@ -64,7 +62,6 @@ class ForecastTabs extends React.Component {
           <Tab label="UVI" disabled />
         </Tabs>
         <SwipeableViews
-
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
         >
@@ -83,17 +80,11 @@ class ForecastTabs extends React.Component {
             />
           </TabContainer>
           <TabContainer >
-            {this.state.forecastTab ? (
-              <ForecastTabs
-                {...propsNeeded}
-              />
+            {this.state.value == 1 ? (
+              <Forecast cityName={this.props.cityName}/>
              ) : (
-              <div>
-                <BoxLoader />
-              </div>
+              <div></div>
             )}
-            <BoxLoader />
-            <Forecast />
           </TabContainer>
           <TabContainer >
             // UVI View
