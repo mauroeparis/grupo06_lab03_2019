@@ -43,21 +43,25 @@ class App extends React.Component {
     return (
       <div>
         <NavBar />
-            <Grid container item xs={4} spacing={0}>
-              <Grid item xs={4} style={{marginTop:'1px'}}>
-                <SearchBar
-                  saveInput={this.handleInput}
-                />
+            <Grid container item xs={12} alignItems="center">
+              <Grid container item xs={4}>
               </Grid>
-              <Grid item xs={2}>
-                <Box mt={2} ml={1}>
-                  <SearchButton
-                    handleBuffer={this.handleBuffer}
-                    cityName={this.state.cityName}
-                    openTabs={this.openTabs}
-                    setWeatherStatus={this.setWeatherStatus}
+              <Grid container item xs={4}>
+                <Grid item xs={10} style={{marginTop:'1px'}}>
+                  <SearchBar
+                    saveInput={this.handleInput}
                   />
-                </Box>
+                </Grid>
+                <Grid item xs={2}>
+                  <Box mt={2} ml={1}>
+                    <SearchButton
+                      handleBuffer={this.handleBuffer}
+                      cityName={this.state.cityName}
+                      openTabs={this.openTabs}
+                      setWeatherStatus={this.setWeatherStatus}
+                    />
+                  </Box>
+                </Grid>
               </Grid>
             </Grid>
         {this.state.tabs ? (

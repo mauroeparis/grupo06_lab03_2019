@@ -23,7 +23,6 @@ class Current extends React.Component  {
       padding : 8
     };
 
-    console.log(this.props);
     const icon =
       this.props.icon ? (
         <img src={require(

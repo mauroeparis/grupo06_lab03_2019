@@ -14,21 +14,29 @@ const API_KEY='5173f98ffa679c9f72e89391881592a0';
 const BASE_URL='https://api.openweathermap.org/data/2.5/forecast';
 
 function DayCard(props) {
+  const icon =
+    props.dayData[0].weather.icon ? (
+      <img src={require(
+        '../../icons/' + props.dayData[0].weather.icon + '.svg'
+      )} width={120} height={120} mode='fit' />
+    ) : (
+      <div> </div>
+    );
   return (
     <Card>
       <CardActionArea>
         <CardContent>
-          <Typography  color="textSecondary" gutterBottom>
+          <Typography  color="textSecondary" gutterBottom align="center">
             {props.dayData[0].dt}
           </Typography>
-          <img src='http://openweathermap.org/img/w/10d.png' />
-          <Typography variant="h5" component="h2">
+          {icon}
+          <Typography variant="h5" component="h2" align="center">
             {props.dayData[3].weather.main}
           </Typography>
-          <Typography variant="body2" component="p">
+          <Typography variant="body2" component="p" align="center">
             Min Temp: {props.dayData[0].main.temp_min}
           </Typography>
-          <Typography variant="body2" component="p">
+          <Typography variant="body2" component="p" align="center">
             Max Temp: {props.dayData[7].main.temp_max}
           </Typography>
         </CardContent>

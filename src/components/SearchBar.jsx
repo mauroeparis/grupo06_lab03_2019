@@ -25,6 +25,7 @@ class SearchBar extends React.Component {
         type="search"
         margin="normal"
         variant="filled"
+        fullWidth
         onChange={this.handleChange}
       />
     );
