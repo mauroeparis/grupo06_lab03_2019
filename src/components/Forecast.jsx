@@ -24,7 +24,7 @@ function DayCard(props) {
     );
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea onClick={props.daily}>
         <CardContent>
           <Typography  color="textSecondary" gutterBottom align="center">
             {props.dayData[0].dt}
@@ -69,7 +69,7 @@ class Forecast extends React.Component {
     dayList.forEach(function(day){
       day.weather = day.weather[0]
       const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const dateObj = new Date(day.dt)
+      const dateObj = new Date(day.dt);
       day.dt = dateObj.getDate() + "/" + dateObj.getMonth() + 1;
       delete day.main.sea_level
       delete day.main.grnd_level
@@ -90,11 +90,11 @@ class Forecast extends React.Component {
 
   render() {
     const cards = [
-      <DayCard dayData={this.state.dayOne} key={1}/>,
-      <DayCard dayData={this.state.dayTwo} key={2}/>,
-      <DayCard dayData={this.state.dayThree} key={3}/>,
-      <DayCard dayData={this.state.dayFour} key={4}/>,
-      <DayCard dayData={this.state.dayFive} key={5}/>,
+      <DayCard dayData={this.state.dayOne} daily={this.props.daily} key={1}/>,
+      <DayCard dayData={this.state.dayTwo} daily={this.props.daily} key={2}/>,
+      <DayCard dayData={this.state.dayThree} daily={this.props.daily} key={3}/>,
+      <DayCard dayData={this.state.dayFour} daily={this.props.daily} key={4}/>,
+      <DayCard dayData={this.state.dayFive} daily={this.props.daily} key={5}/>,
     ];
 
     cards.forEach(function(card, index) {

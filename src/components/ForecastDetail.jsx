@@ -15,9 +15,7 @@ class SimpleCard extends React.Component {
     super(props);
   }
 
-
   render () {
-
     const icon =
     this.props.icon ? (
       <img src={require(
@@ -111,6 +109,7 @@ class MultipleCard extends React.Component {
   }
 
   render () {
+    console.log("hola");
 
     return (
       <Card>
@@ -118,7 +117,7 @@ class MultipleCard extends React.Component {
           <Typography align="center">
             {"Forecast Detail for: " + "TODO: this day " + "TODO:this date"}
           </Typography>
-          <SimpleCard/>
+          {displayRemainingCards(this.props.day)}
         </CardContent>
         <CardActions>
           <Button size="small">Learn More</Button>
@@ -126,6 +125,27 @@ class MultipleCard extends React.Component {
       </Card>
     );
   }
+}
+
+// Falta arreglar parametros de entrada
+function displayRemainingCards(props) {
+  // TODO : REMOVE // Constant setted for testing
+  const dayClicked = 1;
+
+  // Calculate
+  var date = new Date().getHours()
+  const forecastCardsLeft = Math.trunc((24 - date) / 3 );
+  const propsArray = [];
+  for (var i = 0 ; i < forecastCardsLeft ; i++) {
+    propsArray.push(i);
+  }
+  return (
+    <div>
+      {propsArray.map(i => {
+        return <div><SimpleCard i/></div>
+    })}
+    </div>
+  )
 }
 
 export default MultipleCard;

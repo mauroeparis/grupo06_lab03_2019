@@ -30,6 +30,7 @@ class ForecastTabs extends React.Component {
     super(props);
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeIndex = this.handleChangeIndex.bind(this);
+    this.dayDetail= this.dayDetail.bind(this);
     this.state = {
       forecastTab: false,
       value: 0,
@@ -46,6 +47,10 @@ class ForecastTabs extends React.Component {
 
   handleChangeIndex(index) {
     this.setValue(index);
+  }
+
+  dayDetail(day) {
+   this.setState({dayDetail:day});
   }
 
   render() {
@@ -82,12 +87,16 @@ class ForecastTabs extends React.Component {
           </TabContainer>
           <TabContainer >
             {this.state.value == 1 ? (
-              <Forecast cityName={this.props.cityName}/>
+              <Forecast cityName={this.props.cityName} daily={this.dayDetail}/>
              ) : (
               <div></div>
             )}
             <div>
-            <MultipleCard/>
+              {this.state.dayDetail ? (
+                <MultipleCard day={this.state.day} />
+               ) : (
+                <div></div>
+              )}
             </div>
           </TabContainer>
           <TabContainer >
