@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 
@@ -30,6 +29,8 @@ class DayDetail extends React.Component {
         "description": hour.weather.main,
         "wind": hour.wind.speed,
         "icon": hour.weather.icon,
+        "rain": hour.rain,
+        "time": hour.time,
       });
     });
     return data
@@ -37,7 +38,7 @@ class DayDetail extends React.Component {
 
   displayRemainingCards(day) {
     const formattedData = this.formatDayData(day);
-    var cards = []
+    var cards = [];
     formattedData.forEach(function(hour, index) {
       cards.push(<Current {...hour} key={index} />)
     });
@@ -50,9 +51,6 @@ class DayDetail extends React.Component {
     return (
       <Card>
         <CardContent>
-          <Typography align="center">
-            {"Forecast Detail for: " + "TODO: this day " + "TODO:this date"}
-          </Typography>
           {remaniningCards}
         </CardContent>
         <CardActions>

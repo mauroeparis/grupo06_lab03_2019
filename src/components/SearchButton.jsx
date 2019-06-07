@@ -25,8 +25,11 @@ class SearchButton extends React.Component {
   formatNextDaysData(dayList) {
     dayList.forEach(function(day) {
       day.weather = day.weather[0]
+      if (day.rain) {
+        day.rain = day.rain["3h"];
+      }
       const dateObj = new Date(parseInt(day.dt)*1000);
-      day.date = dateObj.getDate() + "/" + dateObj.getMonth() + 1;
+      day.date = ("0" + dateObj.getDate()).slice(-2) + "/" + ("0" + (dateObj.getMonth()+1)).slice(-2);
       day.time = ("0" + dateObj.getHours()).slice(-2) + ":" + ("0" + dateObj.getMinutes()).slice(-2);
       delete day.main.sea_level
       delete day.main.grnd_level
