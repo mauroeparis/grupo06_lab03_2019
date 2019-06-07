@@ -24,10 +24,10 @@ function DayCard(props) {
     );
   return (
     <Card>
-      <CardActionArea onClick={props.daily}>
+      <CardActionArea onClick={() => props.setDayDetailState(props.dayData)}>
         <CardContent>
           <Typography  color="textSecondary" gutterBottom align="center">
-            {props.dayData[0].dt}
+            {props.dayData[0].date}
           </Typography>
           {icon}
           <Typography variant="h5" component="h2" align="center">
@@ -66,11 +66,12 @@ class Forecast extends React.Component {
   }
 
   formatForecastData(dayList) {
-    dayList.forEach(function(day){
+    dayList.forEach(function(day) {
       day.weather = day.weather[0]
       const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const dateObj = new Date(day.dt);
-      day.dt = dateObj.getDate() + "/" + dateObj.getMonth() + 1;
+      const dateObj = new Date(parseInt(day.dt)*1000);
+      day.date = dateObj.getDate() + "/" + dateObj.getMonth() + 1;
+      day.time = ("0" + dateObj.getHours()).slice(-2) + ":" + ("0" + dateObj.getMinutes()).slice(-2);
       delete day.main.sea_level
       delete day.main.grnd_level
       delete day.weather.id
@@ -90,11 +91,11 @@ class Forecast extends React.Component {
 
   render() {
     const cards = [
-      <DayCard dayData={this.state.dayOne} daily={this.props.daily} key={1}/>,
-      <DayCard dayData={this.state.dayTwo} daily={this.props.daily} key={2}/>,
-      <DayCard dayData={this.state.dayThree} daily={this.props.daily} key={3}/>,
-      <DayCard dayData={this.state.dayFour} daily={this.props.daily} key={4}/>,
-      <DayCard dayData={this.state.dayFive} daily={this.props.daily} key={5}/>,
+      <DayCard dayData={this.state.dayOne} setDayDetailState={this.props.setDayDetailState} key={1}/>,
+      <DayCard dayData={this.state.dayTwo} setDayDetailState={this.props.setDayDetailState} key={2}/>,
+      <DayCard dayData={this.state.dayThree} setDayDetailState={this.props.setDayDetailState} key={3}/>,
+      <DayCard dayData={this.state.dayFour} setDayDetailState={this.props.setDayDetailState} key={4}/>,
+      <DayCard dayData={this.state.dayFive} setDayDetailState={this.props.setDayDetailState} key={5}/>,
     ];
 
     cards.forEach(function(card, index) {

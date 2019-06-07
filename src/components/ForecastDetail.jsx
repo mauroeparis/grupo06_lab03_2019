@@ -34,64 +34,64 @@ class SimpleCard extends React.Component {
     return (
       <Card>
         <CardContent>
-              <Grid container item xs={12} style={{marginTop:'50px'}}>
-                <Grid container item xs={3} spacing={3}>
-                </Grid>
-                <Grid container item xs={6} spacing={3}>
-                  <Grid item xs={4}>
-                    <Paper style={{textAlign: 'center'}} >
-                      {icon}
-                    </Paper>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Paper style={paperStyle} >
-                      {'Pressure: '} {this.props.pressure + ' hpm'}
-                    </Paper>
-                    <Paper style={paperStyle} >
-                      {'Min Temp: '} {this.props.minTemp + ' °C'}
-                    </Paper>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Paper style={paperStyle} >
-                      {'Humidity: '} {this.props.humidity + ' %'}
-                    </Paper>
-                    <Paper style={paperStyle} >
-                      {'Max Temp: '} {this.props.maxTemp + ' °C'}
-                    </Paper>
-                  </Grid>
-                </Grid>
-                  <Grid container item xs={3} spacing={3}>
-                  </Grid>
-              <Grid container spacing={1}>
-                <Grid container item xs={3} spacing={3}>
-                </Grid>
-                <Grid container item xs={6} spacing={3}>
-                  <Grid item xs={4}>
-                    <Paper style={paperStyle}>
-                      {this.props.currTemp} {"°C"}
-                    </Paper>
-                    <Paper style={paperStyle} >
-                      {this.props.description}
-                    </Paper>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Paper style={paperStyle} >
-                      {"Sunrise: "} {this.props.sunrise}
-                    </Paper>
-                    <Paper style={paperStyle} >
-                      {"Wind: "} {this.props.wind + ' Km/h'}
-                    </Paper>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Paper style={paperStyle} >
-                      {"Sunset: "} {this.props.sunset}
-                    </Paper>
-                  </Grid>
-                </Grid>
-                <Grid container item xs={3} spacing={3}>
-                </Grid>
+          <Grid container item xs={12} style={{marginTop:'50px'}}>
+            <Grid container item xs={3} spacing={3}>
+            </Grid>
+            <Grid container item xs={6} spacing={3}>
+              <Grid item xs={4}>
+                <Paper style={{textAlign: 'center'}} >
+                  {icon}
+                </Paper>
+              </Grid>
+              <Grid item xs={4}>
+                <Paper style={paperStyle} >
+                  {'Pressure: '} {this.props.pressure + ' hpm'}
+                </Paper>
+                <Paper style={paperStyle} >
+                  {'Min Temp: '} {this.props.minTemp + ' °C'}
+                </Paper>
+              </Grid>
+              <Grid item xs={4}>
+                <Paper style={paperStyle} >
+                  {'Humidity: '} {this.props.humidity + ' %'}
+                </Paper>
+                <Paper style={paperStyle} >
+                  {'Max Temp: '} {this.props.maxTemp + ' °C'}
+                </Paper>
               </Grid>
             </Grid>
+            <Grid container item xs={3} spacing={3}>
+            </Grid>
+            <Grid container spacing={1}>
+              <Grid container item xs={3} spacing={3}>
+              </Grid>
+              <Grid container item xs={6} spacing={3}>
+                <Grid item xs={4}>
+                  <Paper style={paperStyle}>
+                    {this.props.currTemp} {"°C"}
+                  </Paper>
+                  <Paper style={paperStyle} >
+                    {this.props.description}
+                  </Paper>
+                </Grid>
+                <Grid item xs={4}>
+                  <Paper style={paperStyle} >
+                    {"Sunrise: "} {this.props.sunrise}
+                  </Paper>
+                  <Paper style={paperStyle} >
+                    {"Wind: "} {this.props.wind + ' Km/h'}
+                  </Paper>
+                </Grid>
+                <Grid item xs={4}>
+                  <Paper style={paperStyle} >
+                    {"Sunset: "} {this.props.sunset}
+                  </Paper>
+                </Grid>
+              </Grid>
+              <Grid container item xs={3} spacing={3}>
+              </Grid>
+            </Grid>
+          </Grid>
         </CardContent>
 
         <CardActions>
@@ -106,10 +106,38 @@ class SimpleCard extends React.Component {
 class MultipleCard extends React.Component {
   constructor(props) {
     super(props);
+    this.displayRemainingCards = this.displayRemainingCards.bind(this);
+    this.formatDayData = this.formatDayData.bind(this);
+  }
+
+  formatDayData(day) {
+    var data = []
+    day.forEach(function(hour) {
+      data.push({
+        "pressure": hour.main.pressure,
+        "minTemp": hour.main.temp_min,
+        "humidity": hour.main.humidity,
+        "maxTemp": hour.main.temp_max,
+        "currTemp": hour.main.temp,
+        "description": hour.weather.main,
+        "wind": hour.wind.speed,
+        "icon": hour.weather.icon,
+      });
+    });
+    return data
+  }
+
+  displayRemainingCards(day) {
+    const formattedData = this.formatDayData(day);
+    var cards = []
+    formattedData.forEach(function(hour, index) {
+      cards.push(<SimpleCard {...hour} key={index} />)
+    });
+    return cards
   }
 
   render () {
-    console.log("hola");
+    const remaniningCards = this.displayRemainingCards(this.props.day);
 
     return (
       <Card>
@@ -117,7 +145,7 @@ class MultipleCard extends React.Component {
           <Typography align="center">
             {"Forecast Detail for: " + "TODO: this day " + "TODO:this date"}
           </Typography>
-          {displayRemainingCards(this.props.day)}
+          {remaniningCards}
         </CardContent>
         <CardActions>
           <Button size="small">Learn More</Button>
@@ -125,27 +153,6 @@ class MultipleCard extends React.Component {
       </Card>
     );
   }
-}
-
-// Falta arreglar parametros de entrada
-function displayRemainingCards(props) {
-  // TODO : REMOVE // Constant setted for testing
-  const dayClicked = 1;
-
-  // Calculate
-  var date = new Date().getHours()
-  const forecastCardsLeft = Math.trunc((24 - date) / 3 );
-  const propsArray = [];
-  for (var i = 0 ; i < forecastCardsLeft ; i++) {
-    propsArray.push(i);
-  }
-  return (
-    <div>
-      {propsArray.map(i => {
-        return <div><SimpleCard i/></div>
-    })}
-    </div>
-  )
 }
 
 export default MultipleCard;
