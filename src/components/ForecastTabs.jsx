@@ -1,16 +1,15 @@
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import PropTypes from 'prop-types';
-import React from 'react';
-import SwipeableViews from 'react-swipeable-views';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import Typography from '@material-ui/core/Typography';
+import Paper from "@material-ui/core/Paper";
+import PropTypes from "prop-types";
+import React from "react";
+import SwipeableViews from "react-swipeable-views";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
 
-import Current from './Current'
-import Forecast from './Forecast'
-import MultipleCard from './ForecastDetail'
+import Typography from "@material-ui/core/Typography";
 
+import Current from "./Current";
+import Forecast from "./Forecast";
+import MultipleCard from "./ForecastDetail";
 
 function TabContainer({ children }) {
   return (
@@ -21,9 +20,8 @@ function TabContainer({ children }) {
 }
 
 TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
-
 
 class ForecastTabs extends React.Component {
   constructor(props) {
@@ -31,13 +29,12 @@ class ForecastTabs extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleChangeIndex = this.handleChangeIndex.bind(this);
     this.state = {
-      forecastTab: false,
-      value: 0,
+      value: 0
     };
   }
 
-  setValue(newValue){
-    this.setState({value: newValue})
+  setValue(newValue) {
+    this.setState({ value: newValue });
   }
 
   handleChange(event, newValue) {
@@ -51,7 +48,8 @@ class ForecastTabs extends React.Component {
   render() {
     return (
       <Paper>
-        <Tabs style={{marginTop:'40px'}}
+        <Tabs
+          style={{ marginTop: "40px" }}
           value={this.state.value}
           onChange={this.handleChange}
           indicatorColor="primary"
@@ -59,14 +57,14 @@ class ForecastTabs extends React.Component {
           variant="fullWidth"
         >
           <Tab label="Current" />
-          <Tab label="Forecast"/>
+          <Tab label="Forecast" />
           <Tab label="UVI" disabled />
         </Tabs>
         <SwipeableViews
           index={this.state.value}
           onChangeIndex={this.handleChangeIndex}
         >
-          <TabContainer >
+          <TabContainer>
             <Current
               minTemp={this.props.minTemp}
               maxTemp={this.props.maxTemp}
@@ -80,19 +78,17 @@ class ForecastTabs extends React.Component {
               sunset={this.props.sunset}
             />
           </TabContainer>
-          <TabContainer >
+          <TabContainer>
             {this.state.value == 1 ? (
-              <Forecast cityName={this.props.cityName}/>
-             ) : (
-              <div></div>
+              <Forecast cityName={this.props.cityName} />
+            ) : (
+              <div>{}</div>
             )}
             <div>
-            <MultipleCard/>
+              <MultipleCard />
             </div>
           </TabContainer>
-          <TabContainer >
-            // UVI View
-          </TabContainer>
+          <TabContainer>[UVI View]</TabContainer>
         </SwipeableViews>
       </Paper>
     );

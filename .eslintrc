@@ -1,0 +1,23 @@
+{
+    "extends": [
+        "airbnb",
+        "plugin:prettier/recommended",
+        "plugin:jsx-a11y/recommended"
+    ],
+    "plugins": [
+        "prettier",
+        "jsx-a11y"
+    ],
+    "parser": "babel-eslint",
+    "env": {
+        "browser": true
+    },
+    "settings": {
+       "import/no-unresolved": "off",
+       "import/resolver": {
+         "node": {
+           "paths": ["src"]
+         }
+       }
+    }
+}
