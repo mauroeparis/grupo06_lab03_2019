@@ -15,6 +15,8 @@ class SearchButton extends React.Component {
   }
 
   getUsefulData(response) {
+    const sunrise = new Date(parseInt(response.data.sys.sunrise)*1000);
+    const sunset = new Date(parseInt(response.data.sys.sunset)*1000);
     var data = {};
     data.minTemp = response.data.main.temp_min;
     data.maxTemp = response.data.main.temp_max;
@@ -24,8 +26,8 @@ class SearchButton extends React.Component {
     data.wind = response.data.wind.speed;
     data.icon = response.data.weather[0].icon;
     data.description = response.data.weather[0].main;
-    data.sunrise = response.data.sys.sunrise;
-    data.sunset = response.data.sys.sunset;
+    data.sunrise = ("0" + sunrise.getHours()).slice(-2) + ":" + ("0" + sunrise.getMinutes()).slice(-2);
+    data.sunset = ("0" + sunset.getHours()).slice(-2) + ":" + ("0" + sunset.getMinutes()).slice(-2);
     return data;
   }
 
