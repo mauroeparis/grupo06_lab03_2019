@@ -9,7 +9,7 @@ import Typography from '@material-ui/core/Typography';
 
 import Current from './Current'
 import Forecast from './Forecast'
-import MultipleCard from './ForecastDetail'
+import DayDetail from './DayDetail'
 
 
 function TabContainer({ children }) {
@@ -25,28 +25,28 @@ TabContainer.propTypes = {
 };
 
 
-class ForecastTabs extends React.Component {
+class MainTabs extends React.Component {
   constructor(props) {
     super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleChangeIndex = this.handleChangeIndex.bind(this);
+    this.handleTabChange = this.handleTabChange.bind(this);
+    this.handleTabChangeIndex = this.handleTabChangeIndex.bind(this);
     this.setDayDetailState= this.setDayDetailState.bind(this);
     this.state = {
       forecastTab: false,
-      value: 0,
+      selectedTab: 0,
     };
   }
 
-  setValue(newValue){
-    this.setState({value: newValue})
+  setSelectedTab(newValue){
+    this.setState({selectedTab: newValue})
   }
 
-  handleChange(event, newValue) {
-    this.setValue(newValue);
+  handleTabChange(event, newValue) {
+    this.setSelectedTab(newValue);
   }
 
-  handleChangeIndex(index) {
-    this.setValue(index);
+  handleTabChangeIndex(index) {
+    this.setSelectedTab(index);
   }
 
   setDayDetailState(day) {
@@ -57,8 +57,8 @@ class ForecastTabs extends React.Component {
     return (
       <Paper>
         <Tabs style={{marginTop:'40px'}}
-          value={this.state.value}
-          onChange={this.handleChange}
+          value={this.state.selectedTab}
+          onChange={this.handleTabChange}
           indicatorColor="primary"
           textColor="primary"
           variant="fullWidth"
@@ -68,8 +68,8 @@ class ForecastTabs extends React.Component {
           <Tab label="UVI" disabled />
         </Tabs>
         <SwipeableViews
-          index={this.state.value}
-          onChangeIndex={this.handleChangeIndex}
+          index={this.state.selectedTab}
+          onChangeIndex={this.handleTabChangeIndex}
         >
           <TabContainer >
             <Current
@@ -86,14 +86,19 @@ class ForecastTabs extends React.Component {
             />
           </TabContainer>
           <TabContainer >
-            {this.state.value == 1 ? (
-              <Forecast cityName={this.props.cityName} setDayDetailState={this.setDayDetailState}/>
-             ) : (
-              <div></div>
-            )}
+          <Forecast
+            forecastBuffer={this.props.forecastBuffer}
+            cityName={this.props.cityName}
+            setDayDetailState={this.setDayDetailState}
+            dayOne={this.props.dayOne}
+            dayTwo={this.props.dayTwo}
+            dayThree={this.props.dayThree}
+            dayFour={this.props.dayFour}
+            dayFive={this.props.dayFive}
+          />
             <div>
               {this.state.dayDetail ? (
-                <MultipleCard day={this.state.dayDetail} />
+                <DayDetail day={this.state.dayDetail} />
                ) : (
                 <div></div>
               )}
@@ -108,4 +113,4 @@ class ForecastTabs extends React.Component {
   }
 }
 
-export default ForecastTabs;
+export default MainTabs;

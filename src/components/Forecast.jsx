@@ -9,10 +9,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import BoxLoader from "./Loader"
 
 
-const axios = require('axios');
-const API_KEY='5173f98ffa679c9f72e89391881592a0';
-const BASE_URL='https://api.openweathermap.org/data/2.5/forecast';
-
 function DayCard(props) {
   const icon =
     props.dayData[0].weather.icon ? (
@@ -48,54 +44,15 @@ function DayCard(props) {
 class Forecast extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      buff: true
-    }
-  }
-
-  componentDidMount() {
-    axios.get(
-      BASE_URL+'?q='+this.props.cityName+'&units=metric&appid='+API_KEY
-    ).then(response => {
-      this.formatForecastData(response.data.list);
-      this.setState({buff:false})
-    }).catch(response => {
-      console.log(response);
-      this.setState({buff:false})
-    })
-  }
-
-  formatForecastData(dayList) {
-    dayList.forEach(function(day) {
-      day.weather = day.weather[0]
-      const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const dateObj = new Date(parseInt(day.dt)*1000);
-      day.date = dateObj.getDate() + "/" + dateObj.getMonth() + 1;
-      day.time = ("0" + dateObj.getHours()).slice(-2) + ":" + ("0" + dateObj.getMinutes()).slice(-2);
-      delete day.main.sea_level
-      delete day.main.grnd_level
-      delete day.weather.id
-      delete day.clouds
-      delete day.wind.deg
-      delete day.sys
-      delete day.dt_txt
-    });
-    this.setState({
-      dayOne: dayList.slice(0, 8),
-      dayTwo: dayList.slice(8, 16),
-      dayThree: dayList.slice(16, 24),
-      dayFour: dayList.slice(24, 32),
-      dayFive: dayList.slice(32, 40),
-    });
   }
 
   render() {
     const cards = [
-      <DayCard dayData={this.state.dayOne} setDayDetailState={this.props.setDayDetailState} key={1}/>,
-      <DayCard dayData={this.state.dayTwo} setDayDetailState={this.props.setDayDetailState} key={2}/>,
-      <DayCard dayData={this.state.dayThree} setDayDetailState={this.props.setDayDetailState} key={3}/>,
-      <DayCard dayData={this.state.dayFour} setDayDetailState={this.props.setDayDetailState} key={4}/>,
-      <DayCard dayData={this.state.dayFive} setDayDetailState={this.props.setDayDetailState} key={5}/>,
+      <DayCard dayData={this.props.dayOne} setDayDetailState={this.props.setDayDetailState} key={1}/>,
+      <DayCard dayData={this.props.dayTwo} setDayDetailState={this.props.setDayDetailState} key={2}/>,
+      <DayCard dayData={this.props.dayThree} setDayDetailState={this.props.setDayDetailState} key={3}/>,
+      <DayCard dayData={this.props.dayFour} setDayDetailState={this.props.setDayDetailState} key={4}/>,
+      <DayCard dayData={this.props.dayFive} setDayDetailState={this.props.setDayDetailState} key={5}/>,
     ];
 
     cards.forEach(function(card, index) {
@@ -105,7 +62,7 @@ class Forecast extends React.Component {
     });
 
     return (
-      this.state.buff ? (
+      this.props.forecastBuffer ? (
         <div>
           <BoxLoader />
         </div>
