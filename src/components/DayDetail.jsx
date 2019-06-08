@@ -34,7 +34,7 @@ class DayDetail extends React.Component {
   displayRemainingCards(day) {
     const formattedData = this.formatDayData(day);
     const cards = [];
-    formattedData.forEach(function(hour, index) {
+    formattedData.forEach((hour, index) => {
       cards.push(<Current {...hour} key={index} />);
     });
     return cards;

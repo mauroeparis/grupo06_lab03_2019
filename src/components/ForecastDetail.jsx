@@ -39,7 +39,8 @@ class SimpleCard extends React.Component {
       currTemp,
       sunrise,
       wind,
-      sunset, } = this.props;
+      sunset
+    } = this.props;
     return (
       <Card>
         <CardContent>
