@@ -40,19 +40,19 @@ class Current extends React.Component {
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper style={paperStyle} >
-                {'Pressure: '} {this.props.pressure + ' hpm'}
+              <Paper style={paperStyle}>
+                {`Pressure: ${this.props.pressure} hpm`}
               </Paper>
-              <Paper style={paperStyle} >
-                {'Min Temp: '} {this.props.minTemp + ' °C'}
+              <Paper style={paperStyle}>
+                {`Min Temp: ${this.props.minTemp} °C`}
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper style={paperStyle} >
-                {'Humidity: '} {this.props.humidity + ' %'}
+              <Paper style={paperStyle}>
+                {`Humidity: ${this.props.humidity} %`}
               </Paper>
-              <Paper style={paperStyle} >
-                {'Max Temp: '} {this.props.maxTemp + ' °C'}
+              <Paper style={paperStyle}>
+                {`Max Temp: ${this.props.maxTemp} °C`}
               </Paper>
               { this.props.rain &&
                 <Paper style={paperStyle} >
@@ -79,17 +79,17 @@ class Current extends React.Component {
                 <Grid item xs={4}>
                   { this.props.sunrise &&
                     <Paper style={paperStyle} >
-                      {'Sunrise: '} {this.props.sunrise}
+                      {`Sunrise: ${this.props.sunrise}`}
                     </Paper>
                   }
                   <Paper style={paperStyle}>
-                    {"Wind: "} {`${this.props.wind} Km/h`}
+                    {`Wind: ${this.props.wind} Km/h`}
                   </Paper>
                 </Grid>
                 <Grid item xs={4}>
                   { this.props.sunset &&
                     <Paper style={paperStyle} >
-                      {'Sunset: '} {this.props.sunset}
+                      {`Sunset: ${this.props.sunset}`}
                     </Paper>
                   }
                 </Grid>
