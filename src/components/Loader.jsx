@@ -1,14 +1,14 @@
-import React from 'react';
-import { css } from '@emotion/core';
+import React from "react";
+import { css } from "@emotion/core";
 // // First way to import
 // import { ClimbingBoxLoader } from 'react-spinners';
 // Another way to import
-import ClimbingBoxLoader from 'react-spinners/ClimbingBoxLoader';
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
 const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
+  display: block;
+  margin: 0 auto;
+  border-color: red;
 `;
 
 class BoxLoader extends React.Component {
@@ -16,20 +16,21 @@ class BoxLoader extends React.Component {
     super(props);
     this.state = {
       loading: true
-    }
+    };
   }
+
   render() {
     return (
-      <div className='sweet-loading'>
+      <div className="sweet-loading">
         <ClimbingBoxLoader
           css={override}
-          sizeUnit={"em"}
+          sizeUnit="em"
           size={1}
-          color={'#FF5722'}
+          color="#FF5722"
           loading={this.state.loading}
         />
       </div>
-    )
+    );
   }
 }
 

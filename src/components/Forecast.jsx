@@ -1,35 +1,47 @@
-import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
+import React from "react";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import BoxLoader from "./Loader";
 
-import BoxLoader from "./Loader"
-
-
-const axios = require('axios');
-const API_KEY='5173f98ffa679c9f72e89391881592a0';
-const BASE_URL='https://api.openweathermap.org/data/2.5/forecast';
+const axios = require("axios");
+const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
+const API_KEY = "5173f98ffa679c9f72e89391881592a0";
 
 function DayCard(props) {
+  const icon = props.dayData[0].weather.icon ? (
+    <img
+      src={require(`../../icons/${props.dayData[0].weather.icon}.svg`)}
+      width={120}
+      height={120}
+      mode="fit"
+      alt=""
+    />
+    ) : (
+      <div> </div>
+    );
+
+  const minTemp = Math.min(...(props.dayData.map((elem) => elem.main.temp_min)));
+  const maxTemp = Math.max(...(props.dayData.map((elem) => elem.main.temp_max)));
+
   return (
     <Card>
-      <CardActionArea>
+      <CardActionArea onClick={() => props.setDayDetailState(props.dayData)}>
         <CardContent>
-          <Typography  color="textSecondary" gutterBottom>
-            {props.dayData[0].dt}
+          <Typography  color="textSecondary" gutterBottom align="center">
+            {props.dayData[0].date}
           </Typography>
-          <img src='http://openweathermap.org/img/w/10d.png' />
-          <Typography variant="h5" component="h2">
-            {props.dayData[3].weather.main}
+          {icon}
+          <Typography variant="h5" component="h2" align="center">
+            {props.dayData[0].weather.main}
           </Typography>
-          <Typography variant="body2" component="p">
-            Min Temp: {props.dayData[0].main.temp_min}
+          <Typography variant="body2" component="p" align="center">
+            Min Temp: {minTemp}
           </Typography>
-          <Typography variant="body2" component="p">
-            Max Temp: {props.dayData[7].main.temp_max}
+          <Typography variant="body2" component="p" align="center">
+            Max Temp: {maxTemp}
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -38,75 +50,39 @@ function DayCard(props) {
 }
 
 class Forecast extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {
-      buff: true
-    }
-  }
-
-  componentDidMount() {
-    axios.get(
-      BASE_URL+'?q='+this.props.cityName+'&units=metric&appid='+API_KEY
-    ).then(response => {
-      this.formatForecastData(response.data.list);
-      this.setState({buff:false})
-    }).catch(response => {
-      console.log(response);
-      this.setState({buff:false})
-    })
-  }
-
-  formatForecastData(dayList) {
-    dayList.forEach(function(day){
-      day.weather = day.weather[0]
-      const daysOfWeek = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-      const dateObj = new Date(day.dt)
-      day.dt = dateObj.getDate() + "/" + dateObj.getMonth() + 1;
-      delete day.main.sea_level
-      delete day.main.grnd_level
-      delete day.weather.id
-      delete day.clouds
-      delete day.wind.deg
-      delete day.sys
-      delete day.dt_txt
-    });
-    this.setState({
-      dayOne: dayList.slice(0, 8),
-      dayTwo: dayList.slice(8, 16),
-      dayThree: dayList.slice(16, 24),
-      dayFour: dayList.slice(24, 32),
-      dayFive: dayList.slice(32, 40),
-    });
   }
 
   render() {
     const cards = [
-      <DayCard dayData={this.state.dayOne} key={1}/>,
-      <DayCard dayData={this.state.dayTwo} key={2}/>,
-      <DayCard dayData={this.state.dayThree} key={3}/>,
-      <DayCard dayData={this.state.dayFour} key={4}/>,
-      <DayCard dayData={this.state.dayFive} key={5}/>,
+      <DayCard dayData={this.props.dayOne} setDayDetailState={this.props.setDayDetailState} key={1}/>,
+      <DayCard dayData={this.props.dayTwo} setDayDetailState={this.props.setDayDetailState} key={2}/>,
+      <DayCard dayData={this.props.dayThree} setDayDetailState={this.props.setDayDetailState} key={3}/>,
+      <DayCard dayData={this.props.dayFour} setDayDetailState={this.props.setDayDetailState} key={4}/>,
+      <DayCard dayData={this.props.dayFive} setDayDetailState={this.props.setDayDetailState} key={5}/>,
     ];
 
     cards.forEach(function(card, index) {
       <Grid item xs={2} key={index}>
         card
-      </Grid>
+      </Grid>;
     });
 
     return (
-      this.state.buff ? (
+      this.props.forecastBuffer ? (
         <div>
           <BoxLoader />
         </div>
-       ) : (
-        <Grid container>
-          <Grid item xs={1}></Grid>
-          <Grid direction="row" justify="space-between" alignItems="center" container>
-            {cards}
+      ) : (
+        <div>
+          <Grid container>
+            <Grid item xs={1}></Grid>
+            <Grid direction="row" justify="space-between" alignItems="center" container>
+              {cards}
+            </Grid>
           </Grid>
-        </Grid>
+        </div>
       )
     );
   }

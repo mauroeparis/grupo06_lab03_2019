@@ -3,95 +3,101 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-
-// Imports from FixedContainer
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 
 
-class Current extends React.Component  {
-  constructor(props) {
-    super(props);
-  }
-
+// eslint-disable-next-line react/prefer-stateless-function
+class Current extends React.Component {
   render() {
-
     const paperStyle = {
-      textAlign: 'center',
-      color :'grey',
-      padding : 8
+      textAlign: "center",
+      color: "grey",
+      padding: 8
     };
 
-    console.log(this.props);
-    const icon =
-      this.props.icon ? (
-        <img src={require(
-          '../../icons/' + this.props.icon + '.svg'
-        )} width={150} height={150} mode='fit' />
-      ) : (
-        <div> </div>
-      );
+    const icon = this.props.icon ? (
+      <img
+        src={require(`../../icons/${this.props.icon}.svg`)}
+        alt=""
+        width={150}
+        height={150}
+        mode="fit"
+      />
+    ) : (
+      <div> </div>
+    );
     return (
       <div>
-        <Grid container item xs={12} style={{marginTop:'50px'}}>
-          <Grid container item xs={3} spacing={3}>
-          </Grid>
+        <Grid container item xs={12} style={{ marginTop: "50px" }}>
+          <Grid container item xs={3} spacing={3} />
           <Grid container item xs={6} spacing={3}>
             <Grid item xs={4}>
               <Paper style={{textAlign: 'center'}} >
+                {this.props.time &&  <div>{this.props.time}</div>}
                 {icon}
               </Paper>
             </Grid>
             <Grid item xs={4}>
-              <Paper style={paperStyle} >
-                {'Pressure: '} {this.props.pressure + ' hpm'}
+              <Paper style={paperStyle}>
+                {`Pressure: ${this.props.pressure} hpm`}
               </Paper>
-              <Paper style={paperStyle} >
-                {'Min Temp: '} {this.props.minTemp + ' °C'}
-              </Paper>
-            </Grid>
-            <Grid item xs={4}>
-              <Paper style={paperStyle} >
-                {'Humidity: '} {this.props.humidity + ' %'}
-              </Paper>
-              <Paper style={paperStyle} >
-                {'Max Temp: '} {this.props.maxTemp + ' °C'}
+              <Paper style={paperStyle}>
+                {`Min Temp: ${this.props.minTemp} °C`}
               </Paper>
             </Grid>
-          </Grid>
-            <Grid container item xs={3} spacing={3}>
-            </Grid>
-        <Grid container spacing={1}>
-          <Grid container item xs={3} spacing={3}>
-          </Grid>
-          <Grid container item xs={6} spacing={3}>
             <Grid item xs={4}>
               <Paper style={paperStyle}>
-                {this.props.currTemp} {"°C"}
+                {`Humidity: ${this.props.humidity} %`}
               </Paper>
-              <Paper style={paperStyle} >
-                {this.props.description}
+              <Paper style={paperStyle}>
+                {`Max Temp: ${this.props.maxTemp} °C`}
               </Paper>
-            </Grid>
-            <Grid item xs={4}>
-              <Paper style={paperStyle} >
-                {"Sunrise: "} {this.props.sunrise}
-              </Paper>
-              <Paper style={paperStyle} >
-                {"Wind: "} {this.props.wind + ' Km/h'}
-              </Paper>
-            </Grid>
-            <Grid item xs={4}>
-              <Paper style={paperStyle} >
-                {"Sunset: "} {this.props.sunset}
-              </Paper>
+              { this.props.rain &&
+                <Paper style={paperStyle} >
+                  {'Rain: '} {this.props.rain + ' mm'}
+                </Paper>
+              }
             </Grid>
           </Grid>
           <Grid container item xs={3} spacing={3}>
           </Grid>
+          <Grid container spacing={1}>
+            <Grid container item xs={3} spacing={3}>
+            </Grid>
+            <Grid container item xs={3} spacing={3} />
+            <Grid container spacing={1}>
+              <Grid container item xs={3} spacing={3} />
+              <Grid container item xs={6} spacing={3}>
+                <Grid item xs={4}>
+                  <Paper style={paperStyle}>
+                    {this.props.currTemp} {"°C"}
+                  </Paper>
+                  <Paper style={paperStyle}>{this.props.description}</Paper>
+                </Grid>
+                <Grid item xs={4}>
+                  { this.props.sunrise &&
+                    <Paper style={paperStyle} >
+                      {`Sunrise: ${this.props.sunrise}`}
+                    </Paper>
+                  }
+                  <Paper style={paperStyle}>
+                    {`Wind: ${this.props.wind} Km/h`}
+                  </Paper>
+                </Grid>
+                <Grid item xs={4}>
+                  { this.props.sunset &&
+                    <Paper style={paperStyle} >
+                      {`Sunset: ${this.props.sunset}`}
+                    </Paper>
+                  }
+                </Grid>
+              </Grid>
+              <Grid container item xs={3} spacing={3} />
+            </Grid>
+          </Grid>
         </Grid>
-      </Grid>
       </div>
     );
   }
