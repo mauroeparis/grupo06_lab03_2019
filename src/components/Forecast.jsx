@@ -18,6 +18,10 @@ function DayCard(props) {
     ) : (
       <div> </div>
     );
+
+  const minTemp = Math.min(...(props.dayData.map((elem) => elem.main.temp_min)));
+  const maxTemp = Math.max(...(props.dayData.map((elem) => elem.main.temp_max)));
+
   return (
     <Card>
       <CardActionArea onClick={() => props.setDayDetailState(props.dayData)}>
@@ -27,13 +31,13 @@ function DayCard(props) {
           </Typography>
           {icon}
           <Typography variant="h5" component="h2" align="center">
-            {props.dayData[3].weather.main}
+            {props.dayData[0].weather.main}
           </Typography>
           <Typography variant="body2" component="p" align="center">
-            Min Temp: {props.dayData[0].main.temp_min}
+            Min Temp: {minTemp}
           </Typography>
           <Typography variant="body2" component="p" align="center">
-            Max Temp: {props.dayData[7].main.temp_max}
+            Max Temp: {maxTemp}
           </Typography>
         </CardContent>
       </CardActionArea>

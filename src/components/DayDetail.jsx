@@ -53,9 +53,6 @@ class DayDetail extends React.Component {
         <CardContent>
           {remaniningCards}
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     );
   }

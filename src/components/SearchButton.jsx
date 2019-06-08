@@ -1,25 +1,20 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-
+import { dateFormat, timeFormat } from '../utils'
 
 const axios = require('axios');
+const remove = require('lodash.remove');
 const API_KEY='5173f98ffa679c9f72e89391881592a0';
 const BASE_WEATHER_URL='https://api.openweathermap.org/data/2.5/weather'
 const BASE_FORECAST_URL='https://api.openweathermap.org/data/2.5/forecast';
-
 
 
 class SearchButton extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
-    this.nextDaysForecast = this.nextDaysForecast.bind(this);
     this.formatNextDaysData = this.formatNextDaysData.bind(this);
-  }
-
-  nextDaysForecast() {
-
   }
 
   formatNextDaysData(dayList) {
@@ -29,22 +24,23 @@ class SearchButton extends React.Component {
         day.rain = day.rain["3h"];
       }
       const dateObj = new Date(parseInt(day.dt)*1000);
-      day.date = ("0" + dateObj.getDate()).slice(-2) + "/" + ("0" + (dateObj.getMonth()+1)).slice(-2);
-      day.time = ("0" + dateObj.getHours()).slice(-2) + ":" + ("0" + dateObj.getMinutes()).slice(-2);
-      delete day.main.sea_level
-      delete day.main.grnd_level
-      delete day.weather.id
-      delete day.clouds
-      delete day.wind.deg
-      delete day.sys
-      delete day.dt_txt
+      day.date = dateFormat(dateObj);
+      day.time = timeFormat(dateObj);
+      delete day.main.sea_level;
+      delete day.main.grnd_level;
+      delete day.weather.id;
+      delete day.clouds;
+      delete day.wind.deg;
+      delete day.sys;
+      delete day.dt_txt;
     });
+
     return {
-      dayOne: dayList.slice(0, 8),
-      dayTwo: dayList.slice(8, 16),
-      dayThree: dayList.slice(16, 24),
-      dayFour: dayList.slice(24, 32),
-      dayFive: dayList.slice(32, 40),
+      dayOne: remove(dayList, (elem)=>{return ( elem.date === dayList[0].date )}),
+      dayTwo: remove(dayList, (elem)=>{return ( elem.date === dayList[0].date )}),
+      dayThree: remove(dayList, (elem)=>{return ( elem.date === dayList[0].date )}),
+      dayFour: remove(dayList, (elem)=>{return ( elem.date === dayList[0].date )}),
+      dayFive: remove(dayList, (elem)=>{return ( elem.date === dayList[0].date )}),
     };
   }
 
@@ -86,8 +82,8 @@ class SearchButton extends React.Component {
     data.wind = response.data.wind.speed;
     data.icon = response.data.weather[0].icon;
     data.description = response.data.weather[0].main;
-    data.sunrise = ("0" + sunrise.getHours()).slice(-2) + ":" + ("0" + sunrise.getMinutes()).slice(-2);
-    data.sunset = ("0" + sunset.getHours()).slice(-2) + ":" + ("0" + sunset.getMinutes()).slice(-2);
+    data.sunrise = timeFormat(sunrise);
+    data.sunset = timeFormat(sunset);
     return data;
   }
 

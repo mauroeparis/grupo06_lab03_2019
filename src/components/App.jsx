@@ -4,7 +4,6 @@ import Box from '@material-ui/core/Box';
 
 import BoxLoader from "./Loader"
 import NavBar from "./NavBar"
-import TestButton from "./TestButton"
 import MainTabs from "./MainTabs"
 import SearchButton from "./SearchButton"
 import SearchBar from "./SearchBar"
