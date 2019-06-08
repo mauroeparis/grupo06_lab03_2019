@@ -2,9 +2,13 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
+import PropTypes from 'prop-types';
+
+
 // eslint-disable-next-line react/prefer-stateless-function
 class Current extends React.Component {
   render() {
+    console.log(this.props);
     const {
       icon,
       time,
@@ -89,5 +93,18 @@ class Current extends React.Component {
     );
   }
 }
+
+Current.propTypes = {
+  icon: PropTypes.string.isRequired,
+  pressure: PropTypes.number.isRequired,
+  minTemp: PropTypes.number.isRequired,
+  maxTemp: PropTypes.number.isRequired,
+  sunrise: PropTypes.string.isRequired,
+  sunset: PropTypes.string.isRequired,
+  humidity: PropTypes.number.isRequired,
+  currTemp: PropTypes.number.isRequired,
+  wind: PropTypes.number.isRequired,
+  description: PropTypes.string.isRequired,
+};
 
 export default Current;
