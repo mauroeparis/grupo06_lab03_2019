@@ -32,21 +32,18 @@ class Current extends React.Component {
             </Grid>
             <Grid item xs={4}>
               <Paper style={paperStyle}>
-                {"Pressure: "}
-                {`${this.props.pressure} hpm`}
+                {`Pressure: ${this.props.pressure} hpm`}
               </Paper>
               <Paper style={paperStyle}>
-                {"Min Temp: "}
-                {`${this.props.minTemp} °C`}
+                {`Min Temp: ${this.props.minTemp} °C`}
               </Paper>
             </Grid>
             <Grid item xs={4}>
               <Paper style={paperStyle}>
-                {"Humidity: "} {`${this.props.humidity} %`}
+                {`Humidity: ${this.props.humidity} % `}
               </Paper>
               <Paper style={paperStyle}>
-                {"Max Temp: "}
-                {`${this.props.maxTemp} °C`}
+                {`Max Temp: ${this.props.maxTemp} °C`}
               </Paper>
             </Grid>
           </Grid>
@@ -55,22 +52,20 @@ class Current extends React.Component {
             <Grid container item xs={3} spacing={3} />
             <Grid container item xs={6} spacing={3}>
               <Grid item xs={4}>
-                <Paper style={paperStyle}>
-                  {this.props.currTemp} {"°C"}
-                </Paper>
+                <Paper style={paperStyle}>{`${this.props.currTemp} °C`}</Paper>
                 <Paper style={paperStyle}>{this.props.description}</Paper>
               </Grid>
               <Grid item xs={4}>
                 <Paper style={paperStyle}>
-                  {"Sunrise: "} {this.props.sunrise}
+                  {`Sunrise: ${this.props.sunrise}`}
                 </Paper>
                 <Paper style={paperStyle}>
-                  {"Wind: "} {`${this.props.wind} Km/h`}
+                  {`Wind: ${this.props.wind} Km/h}`}
                 </Paper>
               </Grid>
               <Grid item xs={4}>
                 <Paper style={paperStyle}>
-                  {"Sunset: "} {this.props.sunset}
+                  {`Sunset: ${this.props.sunset}`}
                 </Paper>
               </Grid>
             </Grid>
