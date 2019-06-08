@@ -90,12 +90,6 @@ class Forecast extends React.Component {
       />
     ];
 
-    cards.forEach((card, index) => {
-      <Grid item xs={2} key={index}>
-        card
-      </Grid>;
-    });
-
     return forecastBuffer ? (
       <div>
         <BoxLoader />

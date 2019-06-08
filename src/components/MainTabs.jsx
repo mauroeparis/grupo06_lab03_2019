@@ -29,7 +29,6 @@ class MainTabs extends React.Component {
     this.handleTabChangeIndex = this.handleTabChangeIndex.bind(this);
     this.setDayDetailState = this.setDayDetailState.bind(this);
     this.state = {
-      forecastTab: false,
       selectedTab: 0
     };
   }

@@ -37,7 +37,7 @@ class SearchButton extends React.Component {
   }
 
   formatNextDaysData(dayList) {
-    dayList.forEach(function(day) {
+    dayList.forEach(day => {
       day.weather = day.weather[0];
       if (day.rain) {
         day.rain = day.rain["3h"];

@@ -14,7 +14,7 @@ class DayDetail extends React.Component {
 
   formatDayData(day) {
     const data = [];
-    day.forEach(function(hour) {
+    day.forEach(hour => {
       data.push({
         pressure: hour.main.pressure,
         minTemp: hour.main.temp_min,
