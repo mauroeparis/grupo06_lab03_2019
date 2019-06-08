@@ -19,7 +19,7 @@ class App extends React.Component {
     this.state = {
       showCurrentBuffer: false,
       showForecastBuffer: false,
-      tabs: false,
+      tabs: false
     };
   }
 
@@ -27,44 +27,63 @@ class App extends React.Component {
     this.setState(data);
   }
 
-  openTabs() {
-    this.setState({ tabs: true });
-  }
-
-  handleCurrentBuffer() {
-    this.setState({showCurrentBuffer: !this.state.showCurrentBuffer});
-  }
-
-  handleInput(cityName) {
-    this.setState({cityName: cityName});
+  setForecastState(data) {
+    this.setState(data);
   }
 
   setWeatherState(data) {
     this.setState(data);
   }
 
-  setForecastState(data) {
-    this.setState(data);
+  handleInput(cityName) {
+    this.setState({ cityName });
+  }
+
+  handleCurrentBuffer() {
+    this.setState({ showCurrentBuffer: !this.state.showCurrentBuffer });
+  }
+
+  openTabs() {
+    this.setState({ tabs: true });
   }
 
   render() {
+    const {
+      minTemp,
+      maxTemp,
+      humidity,
+      currTemp,
+      pressure,
+      wind,
+      icon,
+      description,
+      sunrise,
+      sunset,
+      cityName,
+      showForecastBuffer,
+      dayOne,
+      dayTwo,
+      dayThree,
+      dayFour,
+      dayFive,
+      tabs,
+      showCurrentBuffer
+    } = this.state;
+
     return (
       <div>
         <NavBar />
         <Grid container item xs={12} alignItems="center">
+          <Grid container item xs={4} />
           <Grid container item xs={4}>
-          </Grid>
-          <Grid container item xs={4}>
-            <Grid item xs={10} style={{ marginTop:'1px' }}>
-              <SearchBar
-                saveInput={this.handleInput}
-              />
+            <Grid item xs={10} style={{ marginTop: "1px" }}>
+              <SearchBar saveInput={this.handleInput} />
             </Grid>
             <Grid item xs={2}>
               <Box mt={2} ml={1}>
                 <SearchButton
                   handleCurrentBuffer={this.handleCurrentBuffer}
-                  cityName={this.state.cityName}
+                  cityName={cityName}
                   openTabs={this.openTabs}
                   setWeatherState={this.setWeatherState}
                   setForecastState={this.setWeatherState}
@@ -73,30 +92,28 @@ class App extends React.Component {
             </Grid>
           </Grid>
         </Grid>
-        {this.state.tabs ? (
+        {tabs ? (
           <MainTabs
-            minTemp={this.state.minTemp}
-            maxTemp={this.state.maxTemp}
-            humidity={this.state.humidity}
-            currTemp={this.state.currTemp}
-            pressure={this.state.pressure}
-            wind={this.state.wind}
-            icon={this.state.icon}
-            description={this.state.description}
-            sunrise={this.state.sunrise}
-            sunset={this.state.sunset}
-            cityName={this.state.cityName}
-            forecastBuffer={this.state.showForecastBuffer}
-            dayOne={this.state.dayOne}
-            dayTwo={this.state.dayTwo}
-            dayThree={this.state.dayThree}
-            dayFour={this.state.dayFour}
-            dayFive={this.state.dayFive}
+            minTemp={minTemp}
+            maxTemp={maxTemp}
+            humidity={humidity}
+            currTemp={currTemp}
+            pressure={pressure}
+            wind={wind}
+            icon={icon}
+            description={description}
+            sunrise={sunrise}
+            sunset={sunset}
+            cityName={cityName}
+            forecastBuffer={showForecastBuffer}
+            dayOne={dayOne}
+            dayTwo={dayTwo}
+            dayThree={dayThree}
+            dayFour={dayFour}
+            dayFive={dayFive}
           />
         ) : (
-          <div>
-            {this.state.showCurrentBuffer && <BoxLoader />}
-          </div>
+          <div>{showCurrentBuffer && <BoxLoader />}</div>
         )}
       </div>
     );

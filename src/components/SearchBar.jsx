@@ -8,7 +8,8 @@ class SearchBar extends React.Component {
   }
 
   handleChange(e) {
-    this.props.saveInput(e.target.value);
+    const { saveInput } = this.props;
+    saveInput(e.target.value);
   }
 
   render() {

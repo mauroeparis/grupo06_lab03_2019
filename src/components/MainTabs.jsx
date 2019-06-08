@@ -22,40 +22,61 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-
 class MainTabs extends React.Component {
   constructor(props) {
     super(props);
     this.handleTabChange = this.handleTabChange.bind(this);
     this.handleTabChangeIndex = this.handleTabChangeIndex.bind(this);
-    this.setDayDetailState= this.setDayDetailState.bind(this);
+    this.setDayDetailState = this.setDayDetailState.bind(this);
     this.state = {
       forecastTab: false,
-      selectedTab: 0,
+      selectedTab: 0
     };
   }
 
   setSelectedTab(newValue){
-    this.setState({selectedTab: newValue})
+    this.setState({ selectedTab: newValue });
   }
 
-  handleTabChange(event, newValue) {
-    this.setSelectedTab(newValue);
+  setDayDetailState(day) {
+    this.setState({ dayDetail: day });
   }
 
   handleTabChangeIndex(index) {
     this.setSelectedTab(index);
   }
 
-  setDayDetailState(day) {
-   this.setState({dayDetail:day});
+  handleTabChange(event, newValue) {
+    this.setSelectedTab(newValue);
   }
 
   render() {
+    const { selectedTab, dayDetail } = this.state;
+    const {
+      minTemp,
+      maxTemp,
+      humidity,
+      currTemp,
+      pressure,
+      wind,
+      icon,
+      description,
+      sunrise,
+      sunset,
+      dayOne,
+      dayTwo,
+      dayThree,
+      dayFour,
+      dayFive,
+      cityName,
+      forecastBuffer,
+    } = this.props;
+
     return (
       <Paper>
-        <Tabs style={{marginTop:'40px'}}
-          value={this.state.selectedTab}
+        <Tabs
+          style={{ marginTop: "40px" }}
+          value={selectedTab}
           onChange={this.handleTabChange}
           indicatorColor="primary"
           textColor="primary"
@@ -66,41 +87,35 @@ class MainTabs extends React.Component {
           <Tab label="UVI" disabled />
         </Tabs>
         <SwipeableViews
-          index={this.state.selectedTab}
+          index={selectedTab}
           onChangeIndex={this.handleTabChangeIndex}
         >
           <TabContainer>
             <Current
-              minTemp={this.props.minTemp}
-              maxTemp={this.props.maxTemp}
-              humidity={this.props.humidity}
-              currTemp={this.props.currTemp}
-              pressure={this.props.pressure}
-              wind={this.props.wind}
-              icon={this.props.icon}
-              description={this.props.description}
-              sunrise={this.props.sunrise}
-              sunset={this.props.sunset}
+              minTemp={minTemp}
+              maxTemp={maxTemp}
+              humidity={humidity}
+              currTemp={currTemp}
+              pressure={pressure}
+              wind={wind}
+              icon={icon}
+              description={description}
+              sunrise={sunrise}
+              sunset={sunset}
             />
           </TabContainer>
-          <TabContainer >
-          <Forecast
-            forecastBuffer={this.props.forecastBuffer}
-            cityName={this.props.cityName}
-            setDayDetailState={this.setDayDetailState}
-            dayOne={this.props.dayOne}
-            dayTwo={this.props.dayTwo}
-            dayThree={this.props.dayThree}
-            dayFour={this.props.dayFour}
-            dayFive={this.props.dayFive}
-          />
-            <div>
-              {this.state.dayDetail ? (
-                <DayDetail day={this.state.dayDetail} />
-               ) : (
-                <div></div>
-              )}
-            </div>
+          <TabContainer>
+            <Forecast
+              forecastBuffer={forecastBuffer}
+              cityName={cityName}
+              setDayDetailState={this.setDayDetailState}
+              dayOne={dayOne}
+              dayTwo={dayTwo}
+              dayThree={dayThree}
+              dayFour={dayFour}
+              dayFive={dayFive}
+            />
+            <div>{dayDetail ? <DayDetail day={dayDetail} /> : <div />}</div>
           </TabContainer>
           <TabContainer>[UVI View]</TabContainer>
         </SwipeableViews>

@@ -1,14 +1,15 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import { dateFormat, timeFormat } from '../utils'
+/* eslint-disable class-methods-use-this */
+import React from "react";
+import Button from "@material-ui/core/Button";
+import { dateFormat, timeFormat } from "../utils";
 
-const axios = require('axios');
-const remove = require('lodash.remove');
-const API_KEY='5173f98ffa679c9f72e89391881592a0';
-const BASE_WEATHER_URL='https://api.openweathermap.org/data/2.5/weather'
-const BASE_FORECAST_URL='https://api.openweathermap.org/data/2.5/forecast';
+const axios = require("axios");
 
+const remove = require("lodash.remove");
+
+const API_KEY = "5173f98ffa679c9f72e89391881592a0";
+const BASE_WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather";
+const BASE_FORECAST_URL = "https://api.openweathermap.org/data/2.5/forecast";
 
 class SearchButton extends React.Component {
   constructor(props) {
@@ -17,13 +18,30 @@ class SearchButton extends React.Component {
     this.formatNextDaysData = this.formatNextDaysData.bind(this);
   }
 
+  getUsefulData(response) {
+    const sunrise = new Date(parseInt(response.data.sys.sunrise) * 1000);
+    const sunset = new Date(parseInt(response.data.sys.sunset) * 1000);
+    const data = {};
+    data.minTemp = response.data.main.temp_min;
+    data.maxTemp = response.data.main.temp_max;
+    data.humidity = response.data.main.humidity;
+    data.currTemp = response.data.main.temp;
+    data.pressure = response.data.main.pressure;
+    data.wind = response.data.wind.speed;
+    data.icon = response.data.weather[0].icon;
+    data.description = response.data.weather[0].main;
+    data.sunrise = timeFormat(sunrise);
+    data.sunset = timeFormat(sunset);
+    return data;
+  }
+
   formatNextDaysData(dayList) {
     dayList.forEach(function(day) {
-      day.weather = day.weather[0]
+      day.weather = day.weather[0];
       if (day.rain) {
         day.rain = day.rain["3h"];
       }
-      const dateObj = new Date(parseInt(day.dt)*1000);
+      const dateObj = new Date(parseInt(day.dt) * 1000);
       day.date = dateFormat(dateObj);
       day.time = timeFormat(dateObj);
       delete day.main.sea_level;
@@ -36,55 +54,59 @@ class SearchButton extends React.Component {
     });
 
     return {
-      dayOne: remove(dayList, (elem)=>{return ( elem.date === dayList[0].date )}),
-      dayTwo: remove(dayList, (elem)=>{return ( elem.date === dayList[0].date )}),
-      dayThree: remove(dayList, (elem)=>{return ( elem.date === dayList[0].date )}),
-      dayFour: remove(dayList, (elem)=>{return ( elem.date === dayList[0].date )}),
-      dayFive: remove(dayList, (elem)=>{return ( elem.date === dayList[0].date )}),
+      dayOne: remove(dayList, elem => {
+        return elem.date === dayList[0].date;
+      }),
+      dayTwo: remove(dayList, elem => {
+        return elem.date === dayList[0].date;
+      }),
+      dayThree: remove(dayList, elem => {
+        return elem.date === dayList[0].date;
+      }),
+      dayFour: remove(dayList, elem => {
+        return elem.date === dayList[0].date;
+      }),
+      dayFive: remove(dayList, elem => {
+        return elem.date === dayList[0].date;
+      })
     };
   }
 
+
   handleClick() {
-    this.props.handleCurrentBuffer();
-    axios.get(
-      BASE_WEATHER_URL+'?q='+this.props.cityName+'&units=metric&appid='+API_KEY
-    ).then(weatherResponse => {
-        this.props.setWeatherState(
-          this.getUsefulData(weatherResponse)
-        );
-      axios.get(
-        BASE_FORECAST_URL+'?q='+this.props.cityName+'&units=metric&appid='+API_KEY
-      ).then(forecastResponse => {
-        this.props.setForecastState(
-          this.formatNextDaysData(forecastResponse.data.list)
-        );
+    const {
+      handleCurrentBuffer,
+      cityName,
+      setWeatherState,
+      setForecastState,
+      openTabs
+    } = this.props;
 
-        this.props.handleCurrentBuffer();
-        this.props.openTabs();
-      }).catch(response => {
-        console.log(response);
+    handleCurrentBuffer();
+    axios
+      .get(`${BASE_WEATHER_URL}?q=${cityName}&units=metric&appid=${API_KEY}`)
+      .then(weatherResponse => {
+        setWeatherState(this.getUsefulData(weatherResponse));
+        axios
+          .get(
+            `${BASE_FORECAST_URL}?q=${cityName}&units=metric&appid=${API_KEY}`
+          )
+          .then(forecastResponse => {
+            setForecastState(
+              this.formatNextDaysData(forecastResponse.data.list)
+            );
+
+            handleCurrentBuffer();
+            openTabs();
+          })
+          .catch(response => {
+            console.log(response);
+          });
       })
-    }).catch(response => {
-      console.log(response);
-      this.props.handleCurrentBuffer();
-    })
-  }
-
-  getUsefulData(response) {
-    const sunrise = new Date(parseInt(response.data.sys.sunrise)*1000);
-    const sunset = new Date(parseInt(response.data.sys.sunset)*1000);
-    var data = {};
-    data.minTemp = response.data.main.temp_min;
-    data.maxTemp = response.data.main.temp_max;
-    data.humidity = response.data.main.humidity;
-    data.currTemp = response.data.main.temp;
-    data.pressure = response.data.main.pressure;
-    data.wind = response.data.wind.speed;
-    data.icon = response.data.weather[0].icon;
-    data.description = response.data.weather[0].main;
-    data.sunrise = timeFormat(sunrise);
-    data.sunset = timeFormat(sunset);
-    return data;
+      .catch(response => {
+        console.log(response);
+        handleCurrentBuffer();
+      });
   }
 
   render() {

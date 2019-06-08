@@ -20,6 +20,7 @@ class BoxLoader extends React.Component {
   }
 
   render() {
+    const { loading } = this.state;
     return (
       <div className="sweet-loading">
         <ClimbingBoxLoader
@@ -27,7 +28,7 @@ class BoxLoader extends React.Component {
           sizeUnit="em"
           size={1}
           color="#FF5722"
-          loading={this.state.loading}
+          loading={loading}
         />
       </div>
     );

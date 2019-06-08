@@ -12,7 +12,7 @@ import Paper from "@material-ui/core/Paper";
 
 class SimpleCard extends React.Component {
   render() {
-    const icon = this.props.icon ? (
+    const { icon } = this.props ? (
       <img
         src={require(`../../icons/${this.props.icon}.svg`)}
         alt="Forecast detail icon"
@@ -30,6 +30,16 @@ class SimpleCard extends React.Component {
       padding: 8
     };
 
+    const {
+      pressure,
+      minTemp,
+      maxTemp,
+      humidity,
+      description,
+      currTemp,
+      sunrise,
+      wind,
+      sunset, } = this.props;
     return (
       <Card>
         <CardContent>
@@ -40,20 +50,12 @@ class SimpleCard extends React.Component {
                 <Paper style={{ textAlign: "center" }}>{icon}</Paper>
               </Grid>
               <Grid item xs={4}>
-                <Paper style={paperStyle}>
-                  {`Pressure: ${this.props.pressure} hpm`}
-                </Paper>
-                <Paper style={paperStyle}>
-                  {`Min Temp: ${this.props.minTemp} °C`}
-                </Paper>
+                <Paper style={paperStyle}>{`Pressure: ${pressure} hpm`}</Paper>
+                <Paper style={paperStyle}>{`Min Temp: ${minTemp} °C`}</Paper>
               </Grid>
               <Grid item xs={4}>
-                <Paper style={paperStyle}>
-                  {`Humidity: ${this.props.humidity} %`}
-                </Paper>
-                <Paper style={paperStyle}>
-                  {`Max Temp: ${this.props.maxTemp} °C`}
-                </Paper>
+                <Paper style={paperStyle}>{`Humidity: ${humidity} %`}</Paper>
+                <Paper style={paperStyle}>{`Max Temp: ${maxTemp} °C`}</Paper>
               </Grid>
             </Grid>
             <Grid container item xs={3} spacing={3} />
@@ -61,23 +63,15 @@ class SimpleCard extends React.Component {
               <Grid container item xs={3} spacing={3} />
               <Grid container item xs={6} spacing={3}>
                 <Grid item xs={4}>
-                  <Paper style={paperStyle}>
-                    {`${this.props.currTemp} °C`}
-                  </Paper>
-                  <Paper style={paperStyle}>{this.props.description}</Paper>
+                  <Paper style={paperStyle}>{`${currTemp} °C`}</Paper>
+                  <Paper style={paperStyle}>{description}</Paper>
                 </Grid>
                 <Grid item xs={4}>
-                  <Paper style={paperStyle}>
-                    {"Sunrise: "} {this.props.sunrise}
-                  </Paper>
-                  <Paper style={paperStyle}>
-                    {`Wind: ${this.props.wind} Km/h`}
-                  </Paper>
+                  <Paper style={paperStyle}>{`Sunrise: ${sunrise}`}</Paper>
+                  <Paper style={paperStyle}>{`Wind: ${wind} Km/h`}</Paper>
                 </Grid>
                 <Grid item xs={4}>
-                  <Paper style={paperStyle}>
-                    {"Sunset: "} {this.props.sunset}
-                  </Paper>
+                  <Paper style={paperStyle}>{`Sunset: ${sunset}`}</Paper>
                 </Grid>
               </Grid>
               <Grid container item xs={3} spacing={3} />
