@@ -1,3 +1,5 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable class-methods-use-this */
 import React from "react";
 import Button from "@material-ui/core/Button";
 
@@ -10,6 +12,7 @@ class SearchButton extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.getUsefulData = this.getUsefulData.bind(this);
   }
 
   getUsefulData(response) {
@@ -29,15 +32,16 @@ class SearchButton extends React.Component {
 
   handleClick() {
     this.props.handleBuffer();
-    axios.get(
-      BASE_URL+'?q='+this.props.cityName+'&units=metric&appid='+API_KEY
-    ).then(response => {
-      this.props.handleBuffer();
-      this.props.openTabs();
-      this.props.setWeatherStatus(this.getUsefulData(response));
-    }).catch(response => {
-      this.props.handleBuffer();
-    });
+    axios
+      .get(`${BASE_URL}?q=${this.props.cityName}&units=metric&appid=${API_KEY}`)
+      .then(response => {
+        this.props.handleBuffer();
+        this.props.openTabs();
+        this.props.setWeatherStatus(this.getUsefulData(response));
+      })
+      .catch(() => {
+        this.props.handleBuffer();
+      });
   }
 
   render() {

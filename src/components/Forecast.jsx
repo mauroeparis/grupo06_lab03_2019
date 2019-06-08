@@ -15,7 +15,7 @@ const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
 function DayCard(props) {
   const icon = props.dayData[0].weather.icon ? (
     <img
-      src={require("../../icons/" + props.dayData[0].weather.icon + ".svg")}
+      src={require(`../../icons/${props.dayData[0].weather.icon}.svg`)}
       width={120}
       height={120}
       mode="fit"
@@ -50,35 +50,30 @@ function DayCard(props) {
 }
 
 class Forecast extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       buff: true
-    }
+    };
   }
 
   componentDidMount() {
-    axios.get(
-      BASE_URL +
-      "?q=" +
-      this.props.cityName +
-      "&units=metric&appid=" +
-      API_KEY
-      )
+    axios
+      .get(`${BASE_URL}?q=${this.props.cityName}&units=metric&appid=${API_KEY}`)
       .then(response => {
         this.formatForecastData(response.data.list);
         this.setState({ buff: false });
       })
-      .catch(response => {
+      .catch(() => {
         this.setState({ buff: false });
       });
   }
 
   formatForecastData(dayList) {
-    dayList.forEach(function(day){
+    dayList.forEach(function(day) {
       day.weather = day.weather[0];
       const dateObj = new Date(day.dt);
-      day.dt = dateObj.getDate() + "/" + dateObj.getMonth() + 1;
+      day.dt = `${dateObj.getDate()}/${dateObj.getMonth()}${1}`;
       delete day.main.sea_level;
       delete day.main.grnd_level;
       delete day.weather.id;
@@ -108,11 +103,10 @@ class Forecast extends React.Component {
     cards.forEach(function(card, index) {
       <Grid item xs={2} key={index}>
         card
-      </Grid>
+      </Grid>;
     });
 
-    return (
-      this.state.buff ? (
+    return this.state.buff ? (
       <div>
         <BoxLoader />
       </div>
@@ -128,7 +122,6 @@ class Forecast extends React.Component {
           {cards}
         </Grid>
       </Grid>
-    )
     );
   }
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import clsx from "clsx";
 import TextField from "@material-ui/core/TextField";
 
 class SearchBar extends React.Component {

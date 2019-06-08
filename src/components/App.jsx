@@ -34,7 +34,7 @@ class App extends React.Component {
   }
 
   handleInput(cityName) {
-    this.setState({ cityName: cityName });
+    this.setState({ cityName });
   }
 
   render() {
