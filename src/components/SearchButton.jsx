@@ -90,8 +90,7 @@ class SearchButton extends React.Component {
   render() {
     return (
       <div>
-        <Button variant="contained" color="primary"
-          onClick={this.handleClick}>
+        <Button variant="contained" color="primary" onClick={this.handleClick}>
           Check weather
         </Button>
       </div>

@@ -1,16 +1,14 @@
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import PropTypes from 'prop-types';
-import React from 'react';
-import SwipeableViews from 'react-swipeable-views';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import Typography from '@material-ui/core/Typography';
+import Paper from "@material-ui/core/Paper";
+import PropTypes from "prop-types";
+import React from "react";
+import SwipeableViews from "react-swipeable-views";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import Typography from "@material-ui/core/Typography";
 
-import Current from './Current'
-import Forecast from './Forecast'
-import DayDetail from './DayDetail'
-
+import Current from "./Current";
+import Forecast from "./Forecast";
+import DayDetail from "./DayDetail";
 
 function TabContainer({ children }) {
   return (
@@ -21,7 +19,7 @@ function TabContainer({ children }) {
 }
 
 TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 
@@ -64,14 +62,14 @@ class MainTabs extends React.Component {
           variant="fullWidth"
         >
           <Tab label="Current" />
-          <Tab label="Forecast"/>
+          <Tab label="Forecast" />
           <Tab label="UVI" disabled />
         </Tabs>
         <SwipeableViews
           index={this.state.selectedTab}
           onChangeIndex={this.handleTabChangeIndex}
         >
-          <TabContainer >
+          <TabContainer>
             <Current
               minTemp={this.props.minTemp}
               maxTemp={this.props.maxTemp}
@@ -104,9 +102,7 @@ class MainTabs extends React.Component {
               )}
             </div>
           </TabContainer>
-          <TabContainer >
-            // UVI View
-          </TabContainer>
+          <TabContainer>[UVI View]</TabContainer>
         </SwipeableViews>
       </Paper>
     );

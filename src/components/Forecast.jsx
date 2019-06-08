@@ -1,20 +1,24 @@
-import React from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import CardActionArea from '@material-ui/core/CardActionArea';
+import React from "react";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import CardActionArea from "@material-ui/core/CardActionArea";
+import BoxLoader from "./Loader";
 
-import BoxLoader from "./Loader"
-
+const axios = require("axios");
+const BASE_URL = "https://api.openweathermap.org/data/2.5/forecast";
+const API_KEY = "5173f98ffa679c9f72e89391881592a0";
 
 function DayCard(props) {
-  const icon =
-    props.dayData[0].weather.icon ? (
-      <img src={require(
-        '../../icons/' + props.dayData[0].weather.icon + '.svg'
-      )} width={120} height={120} mode='fit' />
+  const icon = props.dayData[0].weather.icon ? (
+    <img
+      src={require(`../../icons/${props.dayData[0].weather.icon}.svg`)}
+      width={120}
+      height={120}
+      mode="fit"
+      alt=""
+    />
     ) : (
       <div> </div>
     );
@@ -46,7 +50,7 @@ function DayCard(props) {
 }
 
 class Forecast extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
@@ -62,7 +66,7 @@ class Forecast extends React.Component {
     cards.forEach(function(card, index) {
       <Grid item xs={2} key={index}>
         card
-      </Grid>
+      </Grid>;
     });
 
     return (
@@ -70,13 +74,15 @@ class Forecast extends React.Component {
         <div>
           <BoxLoader />
         </div>
-       ) : (
-        <Grid container>
-          <Grid item xs={1}></Grid>
-          <Grid direction="row" justify="space-between" alignItems="center" container>
-            {cards}
+      ) : (
+        <div>
+          <Grid container>
+            <Grid item xs={1}></Grid>
+            <Grid direction="row" justify="space-between" alignItems="center" container>
+              {cards}
+            </Grid>
           </Grid>
-        </Grid>
+        </div>
       )
     );
   }
