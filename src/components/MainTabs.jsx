@@ -69,7 +69,7 @@ class MainTabs extends React.Component {
       dayFour,
       dayFive,
       cityName,
-      forecastBuffer,
+      forecastBuffer
     } = this.props;
 
     return (
@@ -123,5 +123,25 @@ class MainTabs extends React.Component {
     );
   }
 }
+
+MainTabs.propTypes = {
+  minTemp: PropTypes.number.isRequired,
+  maxTemp: PropTypes.number.isRequired,
+  humidity: PropTypes.number.isRequired,
+  currTemp: PropTypes.number.isRequired,
+  pressure: PropTypes.number.isRequired,
+  wind: PropTypes.number.isRequired,
+  icon: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+  sunrise: PropTypes.string,
+  sunset: PropTypes.string,
+  dayOne: PropTypes.array.isRequired,
+  dayTwo: PropTypes.array.isRequired,
+  dayThree: PropTypes.array.isRequired,
+  dayFour: PropTypes.array.isRequired,
+  dayFive: PropTypes.array.isRequired,
+  cityName: PropTypes.string.isRequired,
+  forecastBuffer: PropTypes.node,
+};
 
 export default MainTabs;

@@ -5,6 +5,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import CardActionArea from "@material-ui/core/CardActionArea";
+
+import PropTypes from "prop-types";
 import BoxLoader from "./Loader";
 
 function DayCard(props) {
@@ -88,7 +90,7 @@ class Forecast extends React.Component {
       />
     ];
 
-    cards.forEach(function(card, index) {
+    cards.forEach((card, index) => {
       <Grid item xs={2} key={index}>
         card
       </Grid>;
@@ -114,6 +116,21 @@ class Forecast extends React.Component {
       </div>
     );
   }
+}
+
+DayCard.propTypes = {
+  dayData: PropTypes.any.isRequired,
+  setDayDetailState: PropTypes.func.isRequired
+};
+
+Forecast.propTypes = {
+  setDayDetailState: PropTypes.func.isRequired,
+  forecastBuffer: PropTypes.any,
+  dayOne: PropTypes.array.isRequired,
+  dayTwo: PropTypes.array.isRequired,
+  dayThree: PropTypes.array.isRequired,
+  dayFour: PropTypes.array.isRequired,
+  dayFive: PropTypes.array.isRequired,
 }
 
 export default Forecast;
