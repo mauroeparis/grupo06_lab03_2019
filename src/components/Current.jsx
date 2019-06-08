@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 // eslint-disable-next-line react/prefer-stateless-function
 class Current extends React.Component {
   render() {
-    console.log(this.props);
     const {
       icon,
       time,
