@@ -1,6 +1,8 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
 
+import PropTypes from "prop-types";
+
 class SearchBar extends React.Component {
   constructor(props) {
     super(props);
@@ -26,5 +28,9 @@ class SearchBar extends React.Component {
     );
   }
 }
+
+SearchBar.propTypes = {
+  saveInput: PropTypes.func.isRequired
+};
 
 export default SearchBar;

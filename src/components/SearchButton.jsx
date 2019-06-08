@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import React from "react";
 import Button from "@material-ui/core/Button";
+import PropTypes from "prop-types";
 import { dateFormat, timeFormat } from "../utils";
 
 const axios = require("axios");
@@ -72,7 +73,6 @@ class SearchButton extends React.Component {
     };
   }
 
-
   handleClick() {
     const {
       handleCurrentBuffer,
@@ -119,5 +119,13 @@ class SearchButton extends React.Component {
     );
   }
 }
+
+SearchButton.propTypes = {
+  handleCurrentBuffer: PropTypes.func.isRequired,
+  cityName: PropTypes.string,
+  setWeatherState: PropTypes.func.isRequired,
+  setForecastState: PropTypes.func.isRequired,
+  openTabs: PropTypes.func.isRequired
+};
 
 export default SearchButton;
