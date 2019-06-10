@@ -118,15 +118,11 @@ día actual.
 
   - `DayDetail`
 
-      - `MultipleCard`
-
-        Componente que se muestra cuando se hace click en algún día que esta
-        compuesto de hasta 8 `SimpleCards` (porque si se consulta el día actual
-        sólo se mostraran las cards que falten para completar el día).
-
-      - `SimpleCard`
-
-        Muestra el detalle del tiempo de esas tres horas.
+        Componente que se muestra cuando se hace click en algún día del 
+        pronóstico. Hereda de `Current` y esta ompuesto de hasta 8 cards (porque
+        si se consulta el día actual sólo se mostraran las cards que falten para 
+        completar el día).
+        En cada card se muestra el detalle del tiempo de esas tres horas.
 
 ## Iconos
 
