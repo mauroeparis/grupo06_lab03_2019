@@ -50,11 +50,22 @@ class DayDetail extends React.Component {
       marginTop: "3rem"
     };
 
+    const weekDays = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
+
+    const dayIndex = weekDays[new Date(day[0].dt * 1000).getDay()];
+
     return (
       <Card>
         <div style={pStyle}>
-          {console.log(day[0].date)}
-          {`Detail Forecast for day ${day[0].date}`}
+          {`Forecast details for: ${dayIndex} ${day[0].date}`}
         </div>
         <CardContent>{remaniningCards}</CardContent>
       </Card>

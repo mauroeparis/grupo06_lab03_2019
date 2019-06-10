@@ -26,12 +26,15 @@ function DayCard(props) {
   const minTemp = Math.min(...dayData.map(elem => elem.main.temp_min));
   const maxTemp = Math.max(...dayData.map(elem => elem.main.temp_max));
 
+  const shortWeekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const dayIndex = shortWeekDays[new Date(dayData[0].dt * 1000).getDay()];
+
   return (
     <Card>
       <CardActionArea onClick={() => setDayDetailState(dayData)}>
         <CardContent>
           <Typography color="textSecondary" gutterBottom align="center">
-            {dayData[0].date}
+            {`${dayIndex} ${dayData[0].date}`}
           </Typography>
           {icon}
           <Typography variant="h5" component="h2" align="center">
