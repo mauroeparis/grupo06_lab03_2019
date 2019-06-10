@@ -95,7 +95,7 @@ día actual.
 
   - `Loader`
 
-      Mientras se hace la peticion a la api y se arbren las tabs con la
+      Mientras se hace la peticion a la api y se abren las tabs con la
       información se muestra el loader.
 
   - `MainTabs`

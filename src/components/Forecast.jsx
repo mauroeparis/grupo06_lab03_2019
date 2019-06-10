@@ -62,6 +62,7 @@ class Forecast extends React.Component {
       dayFour,
       dayFive
     } = this.props;
+
     const cards = [
       <DayCard
         dayData={dayOne}

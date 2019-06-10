@@ -44,8 +44,18 @@ class DayDetail extends React.Component {
     const { day } = this.props;
     const remaniningCards = this.displayRemainingCards(day);
 
+    const pStyle = {
+      fontSize: "20px",
+      textAlign: "center",
+      marginTop: "3rem"
+    };
+
     return (
       <Card>
+        <div style={pStyle}>
+          {console.log(day[0].date)}
+          {`Detail Forecast for day ${day[0].date}`}
+        </div>
         <CardContent>{remaniningCards}</CardContent>
       </Card>
     );
