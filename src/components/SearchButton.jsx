@@ -100,11 +100,11 @@ class SearchButton extends React.Component {
             openTabs();
           })
           .catch(response => {
-            console.log(response);
+            alert(response);
           });
       })
       .catch(response => {
-        console.log(response);
+        alert(response);
         handleCurrentBuffer();
       });
   }
