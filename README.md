@@ -14,30 +14,36 @@ Esto debería ser suficiente para que se instalen todos los paquetes necesarios.
 
 ## Introducción
 
-En este lab nos propusimos crear una Aplicación Front-End que sea capaz de
-procesar peticiones a una API [Open Weather Api](https://openweathermap.org/).
+En este lab nos propusimos crear una Aplicación web enfocandonos en el Front-End
+que sea capaz de procesar peticiones a una API [Open Weather
+Api](https://openweathermap.org/) para devolver el pronóstico del tiempo actual
+y un pronóstico extendido a 5 días.
 
-Nuestro lenguaje principal es `React`, utilizamos como frameworks
-[MATERIAL-UI](https://material-ui.com/) para importar el estilo de los
-componentes, [BABEL](https://babeljs.io/docs/en/) para hacer codigo Javascript
-compatible con versiones anteriores que pueda correr en navegadores viejos o
-desactualizados y `Webpack` que nos permite importar
-imágenes o iconos.
+Como framework principal usamos `React` y para el diseño de la aplicación
+elegimos como base algunos componentes de
+[Material-UI](https://material-ui.com/) que modificamos para poder mostrar los
+datos del tiempo correctamente.
+
+Utilizamos [Babel](https://babeljs.io/docs/en/) para hacer que nuestro código
+Javascript sea compatible con versiones anteriores permitiendo correr en
+navegadores viejos o desactualizados y `Webpack` que, principalmente, nos
+permitió importar imágenes o iconos.
 
 
 Nos guiamos principalmente con el
 [tutorial](https://www.robinwieruch.de/minimal-react-webpack-babel-setup/) de
-`Robin Wieruch`. Ademas, usamos [Axios](https://github.com/axios/axios) para
-manejar las peticiones que hacemos a la API.
+`Robin Wieruch`e información que encontramos en foros como `StackoverFlow` y en
+la misma [documentación de React](https://reactjs.org/). Ademas, usamos
+[Axios](https://github.com/axios/axios) para manejar las peticiones que hacemos
+a la API.
 
-Nuestra app es capaz de mostrar el clima actual y un pronóstico de 5 días de la
-ciudad que se ingresa. La interfaz se compone de una barra en donde debe
-ingresarse el nombre de la ciudad que se desea consultar y el país al que
-pertenece separados por una coma. Luego de esto, se consultan los datos y se
-muestran tres Tabs.
+Nuestra app permite que el usuario ingrese una ciudad y un país para mostrar el
+clima del día y el pronóstico de la semana. La interfaz se compone de una barra
+en donde se ingresan los datos separados por una coma. Luego de esto, se
+consultan los datos y se muestran tres Tabs.
 
-La primera tab muestra el clima actual en la ciudad consultada. Se
-especifican en en una card los siguientes datos:
+La primera tab muestra el clima actual en la ciudad consultada. Se especifican
+en una card los siguientes datos:
 
 - ícono del clima
 - temperatura
@@ -48,16 +54,15 @@ especifican en en una card los siguientes datos:
 - temperaturas máxima y mínima
 - horario del amanecer y de la puesta del sol.
 
-En la segunda tab se muestra un pronóstico extendido a 5 días, donde cada día
-cuenta con una card con la siguiente información:
+En la segunda tab se muestra el pronóstico extendido. Cada día cuenta con una
+card con la siguiente información:
 
 - día (nombre del día y fecha),
 - ícono del clima,
 - temperatura máxima,
 - temperatura mínima.
 
-Si se clickea en
-alguna de las cards se muestra un detalle con información cada 3 horas del
+Si se hace click en alguna de las cards se muestra información cada 3 horas del
 estado del tiempo.
 
 - rango horario al que pertenece la información,
@@ -67,7 +72,7 @@ estado del tiempo.
 - presión,
 - humedad,
 - viento,
-- probabilidad de lluvias,
+- estimación de lluvias (en mm),
 - temperaturas máxima y mínima
 
 
@@ -85,8 +90,8 @@ día actual.
   - `SearchBar`
 
       La barra de búsqueda guarda en su estado el input del cliente y luego se
-      lo pasa al componente App que luego es consultado por el botón para hacer
-      la petición.
+      lo pasa al componente App que luego el botón consulta para hacer la
+      petición.
 
   - `SearchButton`
 
@@ -95,7 +100,7 @@ día actual.
 
   - `Loader`
 
-      Mientras se hace la peticion a la api y se abren las tabs con la
+      Mientras se hace la petición a la API y se abren las tabs con la
       información se muestra el loader.
 
   - `MainTabs`
@@ -118,14 +123,21 @@ día actual.
 
   - `DayDetail`
 
-        Componente que se muestra cuando se hace click en algún día del 
-        pronóstico. Hereda de `Current` y esta ompuesto de hasta 8 cards (porque
-        si se consulta el día actual sólo se mostraran las cards que falten para 
-        completar el día).
-        En cada card se muestra el detalle del tiempo de esas tres horas.
+      Componente que se muestra cuando se hace click en algún día del
+      pronóstico. Hereda de `Current` y esta compuesto de hasta 8 cards (porque
+      si se consulta el día actual sólo se mostraran las cards que falten para
+      completar el día). En cada card se muestra el detalle del tiempo de esas
+      tres horas.
 
 ## Iconos
 
-Los iconos que nos provee la API nos parecieron poco estéticos y encontramos
-estos [weather-icons](https://erikflowers.github.io/weather-icons/) que nos
-parecieron más apropiados por lo cuál decidimos utilizarlos.
+Los iconos que nos proveía la API no nos gustaron y encontramos estos
+[weather-icons](https://erikflowers.github.io/weather-icons/) que nos
+parecieron muchos más estéticos para el estilo de nuestra aplicación.
+
+## Errores
+
+En el caso de que ocurran errores en la petición a la API mostramos un alerta
+con el código del error. Errores comunes que pueden aparecer son:
+falla de conexión a Internet o que el usuario ingrese datos inexistentes que no
+correspondan a una ciudad.
